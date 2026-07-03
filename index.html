@@ -3,482 +3,301 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pague com Controle | Tome o controle das suas finanças</title>
-  <meta name="description" content="Pague com Controle: o método prático para organizar suas contas, sair do aperto e pagar com consciência." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <title>Pague com Controle</title>
   <style>
-    :root{
-      --brand:#0E7C66;
-      --brand-dark:#0A5E4D;
-      --brand-light:#E6F4F0;
-      --accent:#F4A300;
-      --ink:#0F1B16;
-      --muted:#5B6B64;
-      --bg:#FFFFFF;
-      --soft:#F5F8F7;
-      --line:#E2EAE7;
-      --danger:#D64545;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-      color:var(--ink);
-      background:var(--bg);
-      line-height:1.6;
-      -webkit-font-smoothing:antialiased;
-    }
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
-
-    /* Header */
-    .header{
-      position:sticky;top:0;z-index:50;
-      background:rgba(255,255,255,.92);
-      backdrop-filter:saturate(180%) blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-    .logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;letter-spacing:-.02em}
-    .logo-mark{
-      width:40px;height:40px;border-radius:12px;
-      background:linear-gradient(135deg,var(--brand),var(--brand-dark));
-      color:#fff;display:grid;place-items:center;font-weight:900;font-size:20px;
-      box-shadow:0 6px 18px rgba(14,124,102,.35);
-    }
-    .nav-links{display:flex;gap:28px;align-items:center}
-    .nav-links a{font-weight:500;color:var(--muted);font-size:15px}
-    .nav-links a:hover{color:var(--ink)}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:12px 20px;border-radius:12px;font-weight:700;font-size:15px;
-      cursor:pointer;border:none;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
-    }
-    .btn-primary{background:var(--brand);color:#fff;box-shadow:0 8px 20px rgba(14,124,102,.3)}
-    .btn-primary:hover{background:var(--brand-dark);transform:translateY(-2px)}
-    .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-    .btn-ghost:hover{background:var(--soft)}
-    .btn-lg{padding:16px 28px;font-size:17px}
-
-    /* Hero */
-    .hero{padding:72px 0 64px;background:radial-gradient(1200px 600px at 80% -10%,var(--brand-light),transparent 60%)}
-    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      background:var(--brand-light);color:var(--brand-dark);
-      padding:8px 14px;border-radius:999px;font-weight:600;font-size:13px;
-      margin-bottom:20px;
-    }
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(14,124,102,.18)}
-    h1{font-size:clamp(34px,5vw,56px);line-height:1.05;letter-spacing:-.03em;font-weight:900}
-    h1 .hl{color:var(--brand)}
-    .lead{margin-top:18px;font-size:19px;color:var(--muted);max-width:560px}
-    .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
-    .hero-trust{display:flex;align-items:center;gap:14px;margin-top:24px;color:var(--muted);font-size:14px}
-    .stars{color:var(--accent);font-size:16px;letter-spacing:2px}
-
-    .hero-card{
-      background:#fff;border:1px solid var(--line);border-radius:20px;
-      padding:24px;box-shadow:0 30px 60px -25px rgba(15,27,22,.25);
-    }
-    .hero-card h3{font-size:16px;margin-bottom:14px}
-    .progress{height:10px;border-radius:999px;background:var(--soft);overflow:hidden;margin:10px 0}
-    .progress > span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--accent))}
-    .row{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);padding:8px 0;border-bottom:1px dashed var(--line)}
-    .row:last-child{border-bottom:none}
-    .row b{color:var(--ink)}
-
-    /* Scarcity bar */
-    .scarcity{
-      background:linear-gradient(90deg,#0F1B16,#1d3a30);
-      color:#fff;text-align:center;padding:14px 0;font-size:14px;font-weight:600;
-    }
-    .scarcity b{color:var(--accent)}
-    .countdown{display:inline-flex;gap:8px;margin-left:10px}
-    .countdown span{
-      background:rgba(255,255,255,.12);padding:4px 8px;border-radius:8px;font-variant-numeric:tabular-nums;
+    :root {
+      --azul: #1e3a8a;
+      --azul-claro: #3b82f6;
+      --verde: #16a34a;
+      --cinza: #475569;
+      --bg: #f8fafc;
+      --branco: #ffffff;
+      --sombra: 0 10px 25px rgba(0, 0, 0, 0.08);
     }
 
-    /* Sections */
-    section{padding:80px 0}
-    .section-head{text-align:center;max-width:720px;margin:0 auto 48px}
-    .eyebrow{color:var(--brand);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
-    h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.02em;font-weight:800;margin-top:10px}
-    .sub{color:var(--muted);font-size:18px;margin-top:12px}
-
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-    .feature{
-      background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;
-      transition:transform .2s ease,box-shadow .2s ease;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .feature:hover{transform:translateY(-4px);box-shadow:0 20px 40px -25px rgba(15,27,22,.3)}
-    .ico{
-      width:48px;height:48px;border-radius:12px;background:var(--brand-light);
-      color:var(--brand-dark);display:grid;place-items:center;font-size:22px;margin-bottom:16px;
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--cinza);
+      line-height: 1.6;
     }
-    .feature h3{font-size:19px;margin-bottom:8px}
-    .feature p{color:var(--muted);font-size:15px}
 
-    /* Steps */
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-    .step{position:relative;padding:28px;border-radius:18px;background:var(--soft);border:1px solid var(--line)}
-    .step .num{
-      position:absolute;top:-18px;left:24px;width:40px;height:40px;border-radius:12px;
-      background:var(--brand);color:#fff;font-weight:800;display:grid;place-items:center;
+    header {
+      background: var(--branco);
+      box-shadow: var(--sombra);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    .step h3{margin-top:8px;font-size:18px}
-    .step p{color:var(--muted);font-size:15px;margin-top:6px}
 
-    /* Pricing */
-    .pricing{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:880px;margin:0 auto}
-    .plan{
-      background:#fff;border:1px solid var(--line);border-radius:22px;padding:32px;
-      box-shadow:0 20px 50px -30px rgba(15,27,22,.25);position:relative;
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .plan.featured{border:2px solid var(--brand);box-shadow:0 30px 60px -25px rgba(14,124,102,.45)}
-    .badge{
-      position:absolute;top:-14px;left:32px;background:var(--brand);color:#fff;
-      font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;letter-spacing:.04em;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      color: var(--azul);
+      font-size: 1.25rem;
     }
-    .plan h3{font-size:22px}
-    .plan .price{font-size:44px;font-weight:900;letter-spacing:-.02em;margin:10px 0}
-    .plan .price small{font-size:16px;color:var(--muted);font-weight:600}
-    .plan ul{list-style:none;margin:18px 0 24px;display:grid;gap:12px}
-    .plan li{display:flex;gap:10px;font-size:15px;color:var(--ink)}
-    .plan li::before{content:"✓";color:var(--brand);font-weight:800}
-    .plan .btn{width:100%}
 
-    /* Testimonials */
-    .testi{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-    .quote{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px}
-    .quote .stars{margin-bottom:10px}
-    .quote p{font-size:15px;color:var(--ink)}
-    .who{display:flex;align-items:center;gap:12px;margin-top:16px}
-    .avatar{width:40px;height:40px;border-radius:50%;background:var(--brand-light);color:var(--brand-dark);display:grid;place-items:center;font-weight:800}
-    .who b{display:block;font-size:14px}
-    .who span{font-size:13px;color:var(--muted)}
-
-    /* FAQ */
-    .faq{max-width:760px;margin:0 auto}
-    details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px}
-    summary{cursor:pointer;font-weight:700;font-size:16px;list-style:none;display:flex;justify-content:space-between;align-items:center}
-    summary::after{content:"+";color:var(--brand);font-weight:800;font-size:20px}
-    details[open] summary::after{content:"–"}
-    details p{margin-top:10px;color:var(--muted);font-size:15px}
-
-    /* Final CTA */
-    .cta-final{
-      background:linear-gradient(135deg,var(--brand),var(--brand-dark));
-      color:#fff;border-radius:24px;padding:56px;text-align:center;margin:0 auto;max-width:960px;
+    .logo .marca {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--azul), var(--azul-claro));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 800;
     }
-    .cta-final h2{color:#fff}
-    .cta-final p{color:rgba(255,255,255,.85);font-size:18px;margin:12px auto 24px;max-width:560px}
-    .cta-final .btn-primary{background:#fff;color:var(--brand-dark)}
-    .cta-final .btn-primary:hover{background:var(--accent);color:#0F1B16}
 
-    /* Footer */
-    footer{background:var(--soft);border-top:1px solid var(--line);padding:48px 0}
-    .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
-    .foot-grid h4{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
-    .foot-grid a{display:block;color:var(--ink);font-size:15px;padding:6px 0}
-    .foot-grid a:hover{color:var(--brand)}
-    .foot-bottom{border-top:1px solid var(--line);margin-top:32px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
 
-    /* Responsive */
-    @media (max-width:900px){
-      .hero-grid,.features,.steps,.testi,.pricing,.foot-grid{grid-template-columns:1fr}
-      .nav-links{display:none}
-      .hero{padding:48px 0}
-      section{padding:56px 0}
-      .cta-final{padding:36px 24px}
+    .nav-links a {
+      text-decoration: none;
+      color: var(--cinza);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--azul);
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      color: var(--azul);
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      max-width: 640px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+    }
+
+    .cta {
+      display: inline-block;
+      background: var(--verde);
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--sombra);
+    }
+
+    .planos {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--branco);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--sombra);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h3 {
+      color: var(--azul);
+      margin-bottom: 0.5rem;
+    }
+
+    .card .preco {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--azul-claro);
+      margin: 1rem 0;
+    }
+
+    .card ul {
+      list-style: none;
+      margin: 1rem 0;
+    }
+
+    .card ul li {
+      padding: 0.4rem 0;
+    }
+
+    .card .cta {
+      margin-top: 1rem;
+    }
+
+    .metodo {
+      background: var(--branco);
+      padding: 4rem 1.5rem;
+    }
+
+    .metodo .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .metodo h2 {
+      color: var(--azul);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: left;
+    }
+
+    .feature h4 {
+      color: var(--azul);
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      background: var(--azul);
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- Header -->
-  <header class="header">
-    <div class="container nav">
-      <a href="#" class="logo">
-        <span class="logo-mark">P</span>
+  <header>
+    <nav class="nav">
+      <div class="logo">
+        <span class="marca">P</span>
         <span>Pague com Controle</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#metodo">Método</a>
-        <a href="#passos">Como funciona</a>
-        <a href="#planos">Planos</a>
-        <a href="#faq">Dúvidas</a>
-      </nav>
-      <a href="#planos" class="btn btn-primary">Quero começar</a>
-    </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="#metodo">Método</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <!-- Scarcity bar -->
-  <div class="scarcity">
-    <div class="container">
-      Oferta de lançamento: <b>vagas limitadas</b> com desconto.
-      Encerra em
-      <span class="countdown" id="countdown">
-        <span id="cd-h">00</span>:<span id="cd-m">00</span>:<span id="cd-s">00</span>
-      </span>
-    </div>
-  </div>
-
-  <!-- Hero -->
   <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <span class="pill"><span class="dot"></span> Controle financeiro sem complicação</span>
-        <h1>Tome o controle do seu dinheiro e <span class="hl">pague com consciência</span>.</h1>
-        <p class="lead">O Pague com Controle é o método prático para organizar suas contas, enxergar para onde o dinheiro vai e finalmente fechar o mês no azul.</p>
-        <div class="hero-cta">
-          <a href="#planos" class="btn btn-primary btn-lg">Ver planos e começar</a>
-          <a href="#metodo" class="btn btn-ghost btn-lg">Entender o método</a>
-        </div>
-        <div class="hero-trust">
-          <span class="stars">★★★★★</span>
-          <span>+1.200 pessoas já organizaram suas contas com o Pague com Controle</span>
-        </div>
-      </div>
-      <div class="hero-card">
-        <h3>Seu mês sob controle</h3>
-        <div class="row"><span>Renda disponível</span><b>R$ 4.200</b></div>
-        <div class="row"><span>Contas fixas</span><b>R$ 1.850</b></div>
-        <div class="progress"><span style="width:44%"></span></div>
-        <div class="row"><span>Comprometido</span><b>44%</b></div>
-        <div class="row"><span>Sobra para planejar</span><b>R$ 2.350</b></div>
-        <div class="progress"><span style="width:56%"></span></div>
-        <div class="row"><span>Status</span><b style="color:var(--brand)">No azul ✅</b></div>
-      </div>
+    <h1>Pague com Controle</h1>
+    <p>Organize seus pagamentos, evite gastos impulsivos e assuma o comando do seu orçamento com um método simples e eficaz.</p>
+    <a href="#planos" class="cta">Começar agora</a>
+  </section>
+
+  <section id="planos" class="planos">
+    <div class="card">
+      <h3>Plano Básico</h3>
+      <div class="preco">R$ 15</div>
+      <ul>
+        <li>Acesso ao método</li>
+        <li>Guia de controle financeiro</li>
+        <li>Suporte por e-mail</li>
+      </ul>
+      <a href="https://www.asaas.com/c/cl1s151715642sjm" class="cta" target="_blank" rel="noopener">Pagar R$ 15</a>
+    </div>
+
+    <div class="card">
+      <h3>Plano Completo</h3>
+      <div class="preco">R$ 35</div>
+      <ul>
+        <li>Tudo do plano básico</li>
+        <li>Planilhas e ferramentas extras</li>
+        <li>Suporte prioritário</li>
+      </ul>
+      <a href="https://www.asaas.com/c/vm75qru4csgar6xa" class="cta" target="_blank" rel="noopener">Pagar R$ 35</a>
     </div>
   </section>
 
-  <!-- Features / Método -->
-  <section id="metodo">
+  <section id="metodo" class="metodo">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">O método</span>
-        <h2>Por que o Pague com Controle funciona</h2>
-        <p class="sub">Simples, direto e focado em te devolver a tranquilidade no fim do mês.</p>
-      </div>
+      <h2>Por que pagar com controle funciona</h2>
       <div class="features">
         <div class="feature">
-          <div class="ico">📋</div>
-          <h3>Organização clara</h3>
-          <p>Veja todas as suas contas em um só lugar e entenda exatamente para onde cada real está indo.</p>
+          <h4>Foco no essencial</h4>
+          <p>Você passa a priorizar o que realmente importa, eliminando gastos desnecessários.</p>
         </div>
         <div class="feature">
-          <div class="ico">🎯</div>
-          <h3>Prioridades primeiro</h3>
-          <p>Pague o que é essencial antes de gastar com o que não é. O método faz isso por você.</p>
+          <h4>Decisões conscientes</h4>
+          <p>Cada pagamento passa a ser uma escolha planejada, não um impulso.</p>
         </div>
         <div class="feature">
-          <div class="ico">📈</div>
-          <h3>Evolução visível</h3>
-          <p>Acompanhe seu progresso mês a mês e veja sua sobra crescer com pequenos ajustes.</p>
+          <h4>Resultados consistentes</h4>
+          <p>Com rotina e método, o controle financeiro vira hábito e gera resultado duradouro.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Steps -->
-  <section id="passos" style="background:var(--soft)">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Como funciona</span>
-        <h2>3 passos para pagar com controle</h2>
-        <p class="sub">Sem planilhas complicadas. Em poucos minutos você já está no caminho certo.</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <span class="num">1</span>
-          <h3>Liste suas contas</h3>
-          <p>Anote tudo o que precisa pagar no mês, do aluguel à assinatura esquecida.</p>
-        </div>
-        <div class="step">
-          <span class="num">2</span>
-          <h3>Defina prioridades</h3>
-          <p>Separe o essencial do supérfluo e reserve o que sobra para seus objetivos.</p>
-        </div>
-        <div class="step">
-          <span class="num">3</span>
-          <h3>Pague com consciência</h3>
-          <p>Execute o plano, acompanhe o resultado e ajuste conforme o mês avança.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section id="planos">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Planos</span>
-        <h2>Escolha como começar com o Pague com Controle</h2>
-        <p class="sub">Acesso imediato após o pagamento. Pagamento seguro via Asaas.</p>
-      </div>
-      <div class="pricing">
-        <div class="plan">
-          <h3>Plano Básico</h3>
-          <div class="price">R$ 15 <small>/ acesso</small></div>
-          <ul>
-            <li>Método Pague com Controle completo</li>
-            <li>Lista de contas e prioridades</li>
-            <li>Guia de organização mensal</li>
-            <li>Acesso imediato</li>
-          </ul>
-          <a href="https://www.asaas.com/c/cl1s151715642sjm" target="_blank" rel="noopener" class="btn btn-primary">Pagar R$ 15</a>
-        </div>
-        <div class="plan featured">
-          <span class="badge">Mais escolhido</span>
-          <h3>Plano Completo</h3>
-          <div class="price">R$ 35 <small>/ acesso</small></div>
-          <ul>
-            <li>Tudo do Plano Básico</li>
-            <li>Planilha automatizada de controle</li>
-            <li>Acompanhamento de metas</li>
-            <li>Suporte por e-mail</li>
-            <li>Bônus: guia de dívidas</li>
-          </ul>
-          <a href="https://www.asaas.com/c/vm75qru4csgar6xa" target="_blank" rel="noopener" class="btn btn-primary">Pagar R$ 35</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section style="background:var(--soft)">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Quem já usou</span>
-        <h2>Resultados de pessoas reais</h2>
-      </div>
-      <div class="testi">
-        <div class="quote">
-          <div class="stars">★★★★★</div>
-          <p>“Eu não sabia para onde o dinheiro ia. Com o Pague com Controle, no primeiro mês já consegui sobrar R$ 600.”</p>
-          <div class="who"><span class="avatar">M</span><div><b>Marina S.</b><span>Empreendedora</span></div></div>
-        </div>
-        <div class="quote">
-          <div class="stars">★★★★★</div>
-          <p>“O método é simples mas mudou tudo. Paguei contas atrasadas e ainda reservei um dinheiro para emergência.”</p>
-          <div class="who"><span class="avatar">R</span><div><b>Rafael T.</b><span>Freelancer</span></div></div>
-        </div>
-        <div class="quote">
-          <div class="stars">★★★★★</div>
-          <p>“Finalmente parei de viver no vermelho. O Pague com Controle me deu clareza e paz de cabeça.”</p>
-          <div class="who"><span class="avatar">C</span><div><b>Carla M.</b><span>Analista</span></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Dúvidas</span>
-        <h2>Perguntas frequentes</h2>
-      </div>
-      <div class="faq">
-        <details>
-          <summary>Como recebo o acesso após pagar?</summary>
-          <p>Assim que o pagamento é confirmado pelo Asaas, você recebe o acesso ao método Pague com Controle no e-mail informado.</p>
-        </details>
-        <details>
-          <summary>Preciso ter conhecimento financeiro?</summary>
-          <p>Não. O método foi feito para iniciantes, com linguagem simples e passos práticos.</p>
-        </details>
-        <details>
-          <summary>Os links de pagamento são seguros?</summary>
-          <p>Sim. Os pagamentos são processados pela Asaas, plataforma segura e reconhecida no Brasil.</p>
-        </details>
-        <details>
-          <summary>Funciona para quem tem dívidas?</summary>
-          <p>Sim. O Pague com Controle ajuda a priorizar contas e criar um plano para quitar dívidas com o tempo.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section>
-    <div class="container">
-      <div class="cta-final">
-        <h2>Comece a pagar com controle hoje</h2>
-        <p>Não deixe o mês passar no piloto automático. Dê o primeiro passo agora e recupere o controle do seu dinheiro.</p>
-        <a href="#planos" class="btn btn-primary btn-lg">Ver planos</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="foot-grid">
-        <div>
-          <a href="#" class="logo" style="margin-bottom:14px">
-            <span class="logo-mark">P</span>
-            <span>Pague com Controle</span>
-          </a>
-          <p style="color:var(--muted);font-size:15px;max-width:320px;margin-top:8px">
-            O método prático para organizar suas contas, sair do aperto e pagar com consciência.
-          </p>
-        </div>
-        <div>
-          <h4>Navegação</h4>
-          <a href="#metodo">Método</a>
-          <a href="#passos">Como funciona</a>
-          <a href="#planos">Planos</a>
-          <a href="#faq">Dúvidas</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="#">Termos de uso</a>
-          <a href="#">Política de privacidade</a>
-          <a href="mailto:contato@paguecomcontrole.com">contato@paguecomcontrole.com</a>
-        </div>
-      </div>
-      <div class="foot-bottom">
-        <span>© <span id="year"></span> Pague com Controle. Todos os direitos reservados.</span>
-        <span>Pagamentos processados via Asaas.</span>
-      </div>
-    </div>
+  <footer id="contato">
+    <p>&copy; 2024 Pague com Controle. Todos os direitos reservados.</p>
   </footer>
 
   <script>
-    // Ano dinâmico
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Contagem regressiva de escassez (renova a cada 24h)
-    (function(){
-      var KEY='pcc_deadline';
-      var now=Date.now();
-      var deadline=Number(localStorage.getItem(KEY));
-      if(!deadline || deadline < now){
-        deadline=now + 24*60*60*1000;
-        localStorage.setItem(KEY,deadline);
-      }
-      function pad(n){return (n<10?'0':'')+n;}
-      function tick(){
-        var diff=Math.max(0,deadline-Date.now());
-        var h=Math.floor(diff/3600000);
-        var m=Math.floor((diff%3600000)/60000);
-        var s=Math.floor((diff%60000)/1000);
-        document.getElementById('cd-h').textContent=pad(h);
-        document.getElementById('cd-m').textContent=pad(m);
-        document.getElementById('cd-s').textContent=pad(s);
-        if(diff<=0){
-          deadline=Date.now()+24*60*60*1000;
-          localStorage.setItem(KEY,deadline);
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var alvo = document.querySelector(this.getAttribute('href'));
+        if (alvo) {
+          e.preventDefault();
+          alvo.scrollIntoView({ behavior: 'smooth' });
         }
-      }
-      tick();
-      setInterval(tick,1000);
-    })();
+      });
+    });
   </script>
 </body>
 </html>
