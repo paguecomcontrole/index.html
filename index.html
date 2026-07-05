@@ -3,611 +3,236 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pague com Controle | Controle total das suas contas fixas</title>
-  <meta name="description" content="Organize, acompanhe e pague suas contas fixas com inteligência. Planos Essencial e Plus feitos para quem quer controle total." />
+  <title>Pague com Controle | Controle financeiro inteligente</title>
+  <meta name="description" content="Pague com Controle: a plataforma premium para organizar, planejar e dominar suas finanças pessoais e empresariais." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --green-900: #04261a;
-      --green-800: #063b29;
-      --green-700: #0a5236;
-      --green-600: #0e6b46;
-      --green-500: #138a5b;
-      --green-400: #1aa873;
-      --green-300: #4fd6a6;
-      --green-200: #b9f3dd;
-      --green-100: #e7fbf2;
-      --gold: #d9b25a;
-      --gold-soft: #f3e3b8;
-      --ink: #0a1f17;
-      --muted: #5c7268;
-      --white: #ffffff;
-      --radius: 18px;
-      --shadow: 0 24px 60px rgba(4, 38, 26, 0.18);
-      --shadow-sm: 0 10px 24px rgba(4, 38, 26, 0.12);
+    :root{
+      --green-900:#06281b;
+      --green-800:#0a3d27;
+      --green-700:#0e5235;
+      --green-600:#137a4b;
+      --green-500:#1ea366;
+      --green-400:#34c98a;
+      --green-300:#7fe6b8;
+      --green-200:#c9f5e0;
+      --green-50:#eafff3;
+      --gold:#d9b25a;
+      --gold-soft:#f0dca0;
+      --ink:#0a1f15;
+      --muted:#5b7268;
+      --white:#ffffff;
+      --radius:18px;
+      --shadow:0 18px 50px rgba(6,40,27,.18);
+      --shadow-sm:0 8px 24px rgba(6,40,27,.12);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color: var(--ink);
-      background: var(--white);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      color:var(--ink);
+      background:var(--white);
+      line-height:1.6;
+      overflow-x:hidden;
     }
-
-    a { color: inherit; text-decoration: none; }
-
-    .container {
-      width: 100%;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .container{width:100%;max-width:1180px;margin:0 auto;padding:0 24px}
 
     /* ===== Header ===== */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: saturate(180%) blur(14px);
-      border-bottom: 1px solid rgba(10, 82, 54, 0.08);
+    header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(255,255,255,.85);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(20,122,75,.12);
     }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 76px;
+    .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;color:var(--green-800)}
+    .brand .logo{
+      width:42px;height:42px;border-radius:12px;
+      background:linear-gradient(135deg,var(--green-600),var(--green-400));
+      display:grid;place-items:center;color:#fff;font-weight:900;
+      box-shadow:0 8px 20px rgba(20,122,75,.35)
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      font-size: 20px;
-      color: var(--green-800);
-      letter-spacing: -0.02em;
+    .nav-links{display:flex;gap:28px;align-items:center}
+    .nav-links a{font-weight:600;color:var(--green-900);opacity:.85;transition:.2s}
+    .nav-links a:hover{opacity:1;color:var(--green-600)}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:14px 26px;border-radius:999px;font-weight:700;cursor:pointer;
+      border:none;transition:.25s;font-size:15px;
     }
-
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--green-600), var(--green-400));
-      display: grid;
-      place-items: center;
-      color: white;
-      font-weight: 800;
-      box-shadow: 0 8px 18px rgba(19, 138, 91, 0.35);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--green-900);
-      opacity: 0.8;
-      transition: opacity 0.2s ease;
-    }
-
-    .nav-links a:hover { opacity: 1; }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 15px;
-      padding: 14px 22px;
-      border-radius: 999px;
-      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--green-600), var(--green-400));
-      color: white;
-      box-shadow: 0 14px 30px rgba(19, 138, 91, 0.32);
-    }
-
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 38px rgba(19, 138, 91, 0.4); }
-
-    .btn-ghost {
-      background: var(--green-100);
-      color: var(--green-800);
-    }
-
-    .btn-ghost:hover { background: var(--green-200); }
-
-    .btn-gold {
-      background: linear-gradient(135deg, var(--gold), #c79a3e);
-      color: var(--green-900);
-      box-shadow: 0 14px 30px rgba(217, 178, 90, 0.35);
-    }
-
-    .btn-gold:hover { transform: translateY(-2px); }
-
-    .btn-block { width: 100%; }
+    .btn-primary{background:linear-gradient(135deg,var(--green-600),var(--green-400));color:#fff;box-shadow:0 12px 30px rgba(20,122,75,.35)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(20,122,75,.45)}
+    .btn-ghost{background:transparent;color:var(--green-800);border:1.5px solid rgba(20,122,75,.25)}
+    .btn-ghost:hover{background:var(--green-50)}
+    .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:var(--green-900);box-shadow:0 12px 30px rgba(217,178,90,.4)}
+    .btn-gold:hover{transform:translateY(-2px)}
+    .menu-toggle{display:none;background:none;border:none;font-size:26px;color:var(--green-800);cursor:pointer}
 
     /* ===== Hero ===== */
-    .hero {
-      position: relative;
+    .hero{
+      position:relative;
       background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(79, 214, 166, 0.25), transparent 60%),
-        linear-gradient(160deg, var(--green-900), var(--green-700) 55%, var(--green-600));
-      color: white;
-      overflow: hidden;
-      padding: 96px 0 120px;
+        radial-gradient(1200px 600px at 80% -10%,rgba(52,201,138,.25),transparent 60%),
+        radial-gradient(900px 500px at 0% 100%,rgba(127,230,184,.18),transparent 60%),
+        linear-gradient(160deg,var(--green-900),var(--green-700) 60%,var(--green-600));
+      color:#fff;padding:110px 0 130px;overflow:hidden;
     }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
-      background-size: 22px 22px;
-      opacity: 0.5;
-      pointer-events: none;
+    .hero::after{
+      content:"";position:absolute;inset:0;
+      background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);
+      background-size:22px 22px;opacity:.5;pointer-events:none;
     }
-
-    .hero-grid {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 56px;
-      align-items: center;
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative;z-index:2}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+      padding:8px 16px;border-radius:999px;font-size:13px;font-weight:600;color:var(--green-200);
+      margin-bottom:22px;backdrop-filter:blur(8px)
     }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(185, 243, 221, 0.25);
-      color: var(--green-200);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 24px;
+    .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green-300);box-shadow:0 0 12px var(--green-300)}
+    .hero h1{
+      font-size:clamp(34px,5vw,58px);line-height:1.08;font-weight:900;letter-spacing:-1px;margin-bottom:20px
     }
+    .hero h1 span{color:var(--green-300)}
+    .hero p{font-size:18px;color:rgba(255,255,255,.85);max-width:540px;margin-bottom:32px}
+    .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+    .hero-stats{display:flex;gap:34px;margin-top:48px;flex-wrap:wrap}
+    .hero-stats .stat strong{display:block;font-size:30px;font-weight:800;color:#fff}
+    .hero-stats .stat span{font-size:13px;color:rgba(255,255,255,.7)}
 
-    .badge .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--green-300);
-      box-shadow: 0 0 0 4px rgba(79, 214, 166, 0.25);
+    .hero-card{
+      background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+      border-radius:24px;padding:26px;backdrop-filter:blur(16px);box-shadow:var(--shadow)
     }
-
-    .hero h1 {
-      font-size: clamp(34px, 5vw, 56px);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 .accent {
-      background: linear-gradient(120deg, var(--green-300), var(--gold-soft));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p.lead {
-      font-size: 18px;
-      color: rgba(231, 251, 242, 0.86);
-      max-width: 540px;
-      margin-bottom: 32px;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 32px;
-      margin-top: 44px;
-      flex-wrap: wrap;
-    }
-
-    .hero-stats .stat strong {
-      display: block;
-      font-size: 28px;
-      font-weight: 800;
-      color: white;
-    }
-
-    .hero-stats .stat span {
-      font-size: 13px;
-      color: rgba(231, 251, 242, 0.7);
-    }
-
-    .hero-card {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(185, 243, 221, 0.18);
-      border-radius: 24px;
-      padding: 26px;
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card h3 {
-      font-size: 15px;
-      color: var(--green-200);
-      font-weight: 600;
-      margin-bottom: 18px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .bill-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(185, 243, 221, 0.12);
-      border-radius: 14px;
-      margin-bottom: 12px;
-    }
-
-    .bill-row .left { display: flex; align-items: center; gap: 12px; }
-
-    .bill-icon {
-      width: 36px; height: 36px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--green-500), var(--green-400));
-      display: grid; place-items: center; color: white; font-size: 16px;
-    }
-
-    .bill-row .name { font-weight: 700; font-size: 15px; }
-    .bill-row .due { font-size: 12px; color: rgba(231, 251, 242, 0.6); }
-
-    .pill {
-      font-size: 12px;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 999px;
-    }
-
-    .pill.ok { background: rgba(79, 214, 166, 0.18); color: var(--green-300); }
-    .pill.warn { background: rgba(217, 178, 90, 0.18); color: var(--gold-soft); }
+    .hero-card .card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .hero-card .card-head h3{font-size:16px;font-weight:700}
+    .hero-card .card-head .tag{font-size:12px;background:var(--green-400);color:var(--green-900);padding:4px 10px;border-radius:999px;font-weight:700}
+    .balance{font-size:38px;font-weight:900;margin-bottom:6px}
+    .balance small{font-size:14px;font-weight:600;color:rgba(255,255,255,.7)}
+    .balance-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+    .mini-chart{display:flex;align-items:flex-end;gap:8px;height:90px;margin-bottom:18px}
+    .mini-chart .bar{flex:1;border-radius:8px 8px 0 0;background:linear-gradient(180deg,var(--green-300),var(--green-500));opacity:.85}
+    .hero-card ul{list-style:none;display:grid;gap:10px}
+    .hero-card ul li{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.9)}
+    .hero-card ul li .ic{width:26px;height:26px;border-radius:8px;background:rgba(52,201,138,.25);display:grid;place-items:center;font-size:14px}
 
     /* ===== Section base ===== */
-    section { padding: 96px 0; }
+    section{padding:100px 0}
+    .section-head{text-align:center;max-width:680px;margin:0 auto 60px}
+    .eyebrow{color:var(--green-600);font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:13px;margin-bottom:12px}
+    .section-head h2{font-size:clamp(28px,3.6vw,42px);font-weight:900;color:var(--green-900);letter-spacing:-.5px;line-height:1.15}
+    .section-head p{color:var(--muted);font-size:17px;margin-top:14px}
 
-    .section-head {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto 56px;
+    /* ===== Recursos ===== */
+    .features{background:var(--green-50)}
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .feature{
+      background:#fff;border-radius:var(--radius);padding:32px;box-shadow:var(--shadow-sm);
+      border:1px solid rgba(20,122,75,.08);transition:.25s
     }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--green-600);
-      margin-bottom: 14px;
+    .feature:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(20,122,75,.18)}
+    .feature .icon{
+      width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:24px;margin-bottom:18px;
+      background:linear-gradient(135deg,var(--green-600),var(--green-400));color:#fff;box-shadow:0 10px 24px rgba(20,122,75,.3)
     }
+    .feature h3{font-size:19px;font-weight:800;color:var(--green-900);margin-bottom:10px}
+    .feature p{color:var(--muted);font-size:15px}
 
-    .section-head h2 {
-      font-size: clamp(28px, 4vw, 42px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--green-900);
-      line-height: 1.15;
+    /* ===== Como funciona ===== */
+    .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;position:relative}
+    .step{
+      background:#fff;border:1px solid rgba(20,122,75,.1);border-radius:var(--radius);padding:30px;text-align:center;box-shadow:var(--shadow-sm)
     }
-
-    .section-head p {
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 17px;
+    .step .num{
+      width:48px;height:48px;border-radius:50%;margin:0 auto 16px;
+      background:var(--green-900);color:var(--green-300);font-weight:900;font-size:18px;display:grid;place-items:center
     }
+    .step h3{font-size:17px;font-weight:800;color:var(--green-900);margin-bottom:8px}
+    .step p{color:var(--muted);font-size:14px}
 
-    /* ===== Features ===== */
-    .features {
-      background: linear-gradient(180deg, #ffffff, var(--green-100));
+    /* ===== Planos ===== */
+    .plans{background:linear-gradient(180deg,#fff,var(--green-50))}
+    .plans-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:880px;margin:0 auto}
+    .plan{
+      background:#fff;border-radius:24px;padding:38px;box-shadow:var(--shadow-sm);
+      border:2px solid rgba(20,122,75,.1);position:relative;transition:.25s
     }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+    .plan:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .plan.featured{border-color:var(--green-500);box-shadow:0 24px 60px rgba(20,122,75,.25)}
+    .plan.featured::before{
+      content:"Mais popular";position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+      background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:var(--green-900);
+      font-size:12px;font-weight:800;padding:6px 16px;border-radius:999px;box-shadow:0 8px 20px rgba(217,178,90,.4)
     }
-
-    .feature {
-      background: white;
-      border: 1px solid rgba(10, 82, 54, 0.08);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    .plan h3{font-size:24px;font-weight:900;color:var(--green-900)}
+    .plan .sub{color:var(--muted);font-size:14px;margin-bottom:18px}
+    .price{display:flex;align-items:flex-end;gap:6px;margin-bottom:24px}
+    .price .cur{font-size:18px;font-weight:700;color:var(--green-700)}
+    .price .val{font-size:44px;font-weight:900;color:var(--green-900);line-height:1}
+    .price .per{font-size:14px;color:var(--muted);margin-bottom:6px}
+    .plan ul{list-style:none;display:grid;gap:14px;margin-bottom:30px}
+    .plan ul li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--ink)}
+    .plan ul li .check{
+      flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--green-100,rgba(52,201,138,.18));
+      color:var(--green-600);display:grid;place-items:center;font-size:13px;font-weight:900;margin-top:2px
     }
+    .plan .btn{width:100%}
 
-    .feature:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-
-    .feature .ico {
-      width: 48px; height: 48px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--green-100), var(--green-200));
-      color: var(--green-700);
-      display: grid; place-items: center;
-      font-size: 22px;
-      margin-bottom: 18px;
-    }
-
-    .feature h3 {
-      font-size: 19px;
-      font-weight: 700;
-      color: var(--green-900);
-      margin-bottom: 8px;
-    }
-
-    .feature p { color: var(--muted); font-size: 15px; }
-
-    /* ===== How it works ===== */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .step {
-      text-align: center;
-      padding: 24px;
-    }
-
-    .step .num {
-      width: 52px; height: 52px; margin: 0 auto 16px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--green-600), var(--green-400));
-      color: white;
-      font-weight: 800;
-      font-size: 20px;
-      display: grid; place-items: center;
-      box-shadow: 0 12px 24px rgba(19, 138, 91, 0.3);
-    }
-
-    .step h3 { font-size: 17px; color: var(--green-900); margin-bottom: 6px; }
-    .step p { color: var(--muted); font-size: 14px; }
-
-    /* ===== Pricing ===== */
-    .pricing {
+    /* ===== Indicação ===== */
+    .refer{
       background:
-        radial-gradient(900px 500px at 50% -20%, rgba(79, 214, 166, 0.18), transparent 60%),
-        linear-gradient(180deg, var(--green-100), #ffffff);
+        radial-gradient(800px 400px at 90% 10%,rgba(217,178,90,.25),transparent 60%),
+        linear-gradient(135deg,var(--green-800),var(--green-600));
+      color:#fff;border-radius:28px;padding:64px;overflow:hidden;position:relative
     }
-
-    .price-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 28px;
-      max-width: 880px;
-      margin: 0 auto;
+    .refer-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;position:relative;z-index:2}
+    .refer h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.15;margin-bottom:14px}
+    .refer h2 span{color:var(--gold-soft)}
+    .refer p{color:rgba(255,255,255,.85);font-size:17px;margin-bottom:26px;max-width:520px}
+    .refer .btn-gold{font-size:16px;padding:16px 30px}
+    .refer-card{
+      background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:26px;backdrop-filter:blur(10px)
     }
-
-    .plan {
-      position: relative;
-      background: white;
-      border: 1px solid rgba(10, 82, 54, 0.1);
-      border-radius: 24px;
-      padding: 36px 32px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .plan.featured {
-      border: 2px solid var(--green-500);
-      box-shadow: 0 30px 70px rgba(19, 138, 91, 0.25);
-      background: linear-gradient(180deg, #ffffff, var(--green-100));
-    }
-
-    .plan-tag {
-      position: absolute;
-      top: -14px;
-      left: 32px;
-      background: linear-gradient(135deg, var(--green-600), var(--green-400));
-      color: white;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 999px;
-      box-shadow: 0 8px 18px rgba(19, 138, 91, 0.35);
-    }
-
-    .plan h3 {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--green-900);
-      margin-bottom: 6px;
-    }
-
-    .plan .desc { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
-
-    .plan .price {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-
-    .plan .price .currency { font-size: 20px; font-weight: 700; color: var(--green-800); }
-    .plan .price .amount { font-size: 48px; font-weight: 800; color: var(--green-900); letter-spacing: -0.03em; }
-    .plan .price .period { font-size: 16px; color: var(--muted); font-weight: 600; }
-
-    .plan .price-note { font-size: 13px; color: var(--muted); margin-bottom: 26px; }
-
-    .plan ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 30px;
-      flex: 1;
-    }
-
-    .plan li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 15px;
-      color: var(--ink);
-    }
-
-    .check {
-      flex-shrink: 0;
-      width: 22px; height: 22px;
-      border-radius: 50%;
-      background: var(--green-100);
-      color: var(--green-700);
-      display: grid; place-items: center;
-      font-size: 13px;
-      font-weight: 800;
-      margin-top: 2px;
-    }
-
-    .plan.featured .check { background: var(--green-200); }
-
-    /* ===== Referral banner ===== */
-    .referral {
-      background: linear-gradient(135deg, var(--green-800), var(--green-600));
-      color: white;
-      border-radius: 28px;
-      padding: 48px;
-      display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
-      align-items: center;
-      gap: 36px;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .referral::before {
-      content: '';
-      position: absolute;
-      width: 320px; height: 320px;
-      right: -80px; top: -120px;
-      background: radial-gradient(circle, rgba(217, 178, 90, 0.35), transparent 70%);
-      pointer-events: none;
-    }
-
-    .referral .eyebrow { color: var(--gold-soft); }
-
-    .referral h2 {
-      font-size: clamp(26px, 3.5vw, 36px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-    }
-
-    .referral p { color: rgba(231, 251, 242, 0.85); font-size: 16px; max-width: 520px; }
-
-    .referral-cta { display: flex; flex-direction: column; gap: 12px; }
-
-    .referral-code {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px dashed rgba(185, 243, 221, 0.4);
-      border-radius: 14px;
-      padding: 16px 18px;
-      text-align: center;
-    }
-
-    .referral-code .label {
-      font-size: 12px;
-      color: var(--green-200);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
-    }
-
-    .referral-code .code {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-      color: var(--gold-soft);
-    }
+    .refer-card .reward{font-size:46px;font-weight:900;color:var(--gold-soft)}
+    .refer-card .reward small{display:block;font-size:13px;color:rgba(255,255,255,.75);font-weight:600;margin-top:4px}
+    .refer-card .row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,.2);font-size:14px}
+    .refer-card .row:last-child{border-bottom:none}
+    .refer-card .row strong{color:#fff}
 
     /* ===== Footer ===== */
-    footer {
-      background: var(--green-900);
-      color: rgba(231, 251, 242, 0.7);
-      padding: 56px 0 32px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1fr;
-      gap: 32px;
-      margin-bottom: 36px;
-    }
-
-    .footer-brand .brand { color: white; margin-bottom: 14px; }
-    .footer-brand p { font-size: 14px; max-width: 280px; }
-
-    .footer-col h4 {
-      color: white;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 16px;
-    }
-
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col a { font-size: 14px; opacity: 0.8; }
-    .footer-col a:hover { opacity: 1; color: var(--green-300); }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(185, 243, 221, 0.12);
-      padding-top: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+    footer{background:var(--green-900);color:rgba(255,255,255,.8);padding:70px 0 30px}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px}
+    .footer-brand .brand{color:#fff;margin-bottom:16px}
+    .footer-brand p{font-size:14px;color:rgba(255,255,255,.65);max-width:300px}
+    .footer-col h4{color:#fff;font-size:15px;font-weight:700;margin-bottom:16px}
+    .footer-col ul{list-style:none;display:grid;gap:10px}
+    .footer-col ul li a{font-size:14px;color:rgba(255,255,255,.65);transition:.2s}
+    .footer-col ul li a:hover{color:var(--green-300)}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:rgba(255,255,255,.55)}
+    .socials{display:flex;gap:12px}
+    .socials a{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.08);display:grid;place-items:center;font-size:15px;transition:.2s}
+    .socials a:hover{background:var(--green-500);color:#fff}
 
     /* ===== Responsive ===== */
-    @media (max-width: 920px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .feature-grid { grid-template-columns: 1fr 1fr; }
-      .steps { grid-template-columns: 1fr 1fr; }
-      .referral { grid-template-columns: 1fr; padding: 36px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .nav-links { display: none; }
+    @media(max-width:920px){
+      .hero-grid,.refer-grid{grid-template-columns:1fr}
+      .features-grid{grid-template-columns:repeat(2,1fr)}
+      .steps-grid{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .hero-card{order:-1}
     }
-
-    @media (max-width: 620px) {
-      .feature-grid { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: 1fr; }
-      .price-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .hero { padding: 64px 0 80px; }
-      section { padding: 72px 0; }
-      .referral { padding: 28px; }
+    @media(max-width:640px){
+      .nav-links{display:none}
+      .menu-toggle{display:block}
+      .features-grid,.steps-grid,.plans-grid,.footer-grid{grid-template-columns:1fr}
+      .refer{padding:40px 26px}
+      section{padding:70px 0}
+      .hero{padding:70px 0 90px}
     }
   </style>
 </head>
@@ -617,229 +242,214 @@
   <header>
     <div class="container nav">
       <a href="#" class="brand">
-        <span class="brand-mark">P</span>
+        <span class="logo">P</span>
         Pague com Controle
       </a>
       <nav class="nav-links">
         <a href="#recursos">Recursos</a>
         <a href="#como-funciona">Como funciona</a>
         <a href="#planos">Planos</a>
-        <a href="#indicacao">Indique e ganhe</a>
+        <a href="#indicacao">Indicação</a>
       </nav>
       <a href="#planos" class="btn btn-primary">Começar agora</a>
+      <button class="menu-toggle" aria-label="Menu">☰</button>
     </div>
   </header>
 
   <!-- Hero -->
   <section class="hero">
     <div class="container hero-grid">
-      <div class="hero-copy">
-        <span class="badge"><span class="dot"></span> Controle financeiro premium para suas contas fixas</span>
-        <h1>Pague suas contas com <span class="accent">controle total</span> e nunca mais perca um vencimento.</h1>
-        <p class="lead">Centralize, acompanhe e quite suas contas fixas em um só lugar. Lembretes inteligentes, visão clara do mês e organização impecável.</p>
+      <div class="hero-content">
+        <span class="badge"><span class="dot"></span> Nova versão 2025 disponível</span>
+        <h1>Domine suas finanças com <span>controle total</span> e clareza.</h1>
+        <p>O Pague com Controle organiza seus pagamentos, planeja seu orçamento e te ajuda a tomar decisões financeiras inteligentes — tudo em um só lugar.</p>
         <div class="hero-cta">
-          <a href="#planos" class="btn btn-gold">Ver planos</a>
-          <a href="#como-funciona" class="btn btn-ghost">Como funciona</a>
+          <a href="#planos" class="btn btn-primary">Ver planos</a>
+          <a href="#como-funciona" class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.4)">Como funciona</a>
         </div>
         <div class="hero-stats">
-          <div class="stat"><strong>+12 mil</strong><span>contas organizadas por mês</span></div>
-          <div class="stat"><strong>99,2%</strong><span>pagamentos em dia</span></div>
-          <div class="stat"><strong>4,9/5</strong><span>satisfação dos usuários</span></div>
+          <div class="stat"><strong>+12 mil</strong><span>Usuários ativos</span></div>
+          <div class="stat"><strong>R$ 4,8 mi</strong><span>Organizados em contas</span></div>
+          <div class="stat"><strong>4,9/5</strong><span>Avaliação média</span></div>
         </div>
       </div>
 
       <div class="hero-card">
-        <h3>Contas deste mês</h3>
-        <div class="bill-row">
-          <div class="left">
-            <div class="bill-icon">⚡</div>
-            <div>
-              <div class="name">Energia</div>
-              <div class="due">Vence em 12/05</div>
-            </div>
-          </div>
-          <span class="pill ok">Agendada</span>
+        <div class="card-head">
+          <h3>Painel financeiro</h3>
+          <span class="tag">Ao vivo</span>
         </div>
-        <div class="bill-row">
-          <div class="left">
-            <div class="bill-icon">🌐</div>
-            <div>
-              <div class="name">Internet</div>
-              <div class="due">Vence em 18/05</div>
-            </div>
+        <div class="balance-row">
+          <div>
+            <div class="balance">R$ 18.450<small>,00</small></div>
+            <small style="color:rgba(255,255,255,.7)">Saldo do mês</small>
           </div>
-          <span class="pill warn">Aguarda</span>
+          <span style="color:var(--green-300);font-weight:700">+12,4%</span>
         </div>
-        <div class="bill-row">
-          <div class="left">
-            <div class="bill-icon">💧</div>
-            <div>
-              <div class="name">Água</div>
-              <div class="due">Vence em 22/05</div>
-            </div>
-          </div>
-          <span class="pill ok">Paga</span>
+        <div class="mini-chart">
+          <div class="bar" style="height:40%"></div>
+          <div class="bar" style="height:65%"></div>
+          <div class="bar" style="height:48%"></div>
+          <div class="bar" style="height:78%"></div>
+          <div class="bar" style="height:58%"></div>
+          <div class="bar" style="height:90%"></div>
+          <div class="bar" style="height:72%"></div>
         </div>
-        <div class="bill-row">
-          <div class="left">
-            <div class="bill-icon">📺</div>
-            <div>
-              <div class="name">Streaming</div>
-              <div class="due">Vence em 27/05</div>
-            </div>
-          </div>
-          <span class="pill warn">Aguarda</span>
-        </div>
+        <ul>
+          <li><span class="ic">✓</span> Contas pagas em dia</li>
+          <li><span class="ic">↑</span> Metas de economia no caminho certo</li>
+          <li><span class="ic">$</span> Lembretes automáticos de vencimento</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- Features -->
+  <!-- Recursos -->
   <section id="recursos" class="features">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Recursos</span>
-        <h2>Tudo o que você precisa para dominar suas contas fixas</h2>
-        <p>Uma experiência premium, simples e poderosa — pensada para quem leva o controle financeiro a sério.</p>
+        <div class="eyebrow">Recursos</div>
+        <h2>Tudo o que você precisa para pagar com controle</h2>
+        <p>Ferramentas premium pensadas para quem quer organizar a vida financeira sem complicação.</p>
       </div>
-      <div class="feature-grid">
+      <div class="features-grid">
         <div class="feature">
-          <div class="ico">📅</div>
-          <h3>Calendário inteligente</h3>
-          <p>Visualize todos os vencimentos do mês em uma linha do tempo clara e nunca mais seja pego de surpresa.</p>
+          <div class="icon">💳</div>
+          <h3>Gestão de contas</h3>
+          <p>Centralize boletos, carnês e assinaturas. Tenha visão total do que entra e do que sai todo mês.</p>
         </div>
         <div class="feature">
-          <div class="ico">🔔</div>
-          <h3>Lembretes precisos</h3>
-          <p>Receba avisos no momento certo, por e-mail e notificação, antes de cada vencimento das suas contas.</p>
+          <div class="icon">📊</div>
+          <h3>Painel inteligente</h3>
+          <p>Gráficos claros e relatórios automáticos para entender para onde seu dinheiro está indo.</p>
         </div>
         <div class="feature">
-          <div class="ico">📊</div>
-          <h3>Painel de controle</h3>
-          <p>Acompanhe o quanto já pagou, o que está pendente e o total previsto para o mês em segundos.</p>
+          <div class="icon">⏰</div>
+          <h3>Lembretes automáticos</h3>
+          <p>Receba avisos antes do vencimento e nunca mais pague uma conta em atraso ou com juros.</p>
         </div>
         <div class="feature">
-          <div class="ico">🔁</div>
-          <h3>Contas recorrentes</h3>
-          <p>Cadastre contas fixas uma única vez e deixe o sistema renovar automaticamente a cada mês.</p>
+          <div class="icon">🎯</div>
+          <h3>Metas e orçamento</h3>
+          <p>Defina limites por categoria e acompanhe seu progresso rumo à liberdade financeira.</p>
         </div>
         <div class="feature">
-          <div class="ico">🔒</div>
-          <h3>Dados protegidos</h3>
-          <p>Criptografia de ponta a ponta e segurança bancária para manter suas informações sempre protegidas.</p>
+          <div class="icon">🔒</div>
+          <h3>Segurança premium</h3>
+          <p>Criptografia de ponta a ponta e backups automáticos. Seus dados sempre protegidos.</p>
         </div>
         <div class="feature">
-          <div class="ico">📱</div>
-          <h3>Acesso de qualquer lugar</h3>
-          <p>Use no computador ou no celular, com uma interface fluida e pensada para o seu dia a dia.</p>
+          <div class="icon">📱</div>
+          <h3>Acesso multiplataforma</h3>
+          <p>Use no computador, tablet ou celular. Suas finanças sincronizadas em todos os dispositivos.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How it works -->
+  <!-- Como funciona -->
   <section id="como-funciona">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Como funciona</span>
-        <h2>Controle total em 4 passos simples</h2>
-        <p>Sem complicação. Em poucos minutos você organiza todas as suas contas fixas.</p>
+        <div class="eyebrow">Como funciona</div>
+        <h2>Comece a controlar em 4 passos</h2>
+        <p>Em poucos minutos você organiza tudo e começa a ter o controle nas suas mãos.</p>
       </div>
-      <div class="steps">
+      <div class="steps-grid">
         <div class="step">
           <div class="num">1</div>
-          <h3>Cadastre suas contas</h3>
-          <p>Adicione energia, internet, água, streaming e todas as suas contas fixas.</p>
+          <h3>Crie sua conta</h3>
+          <p>Escolha um plano e ative seu acesso premium em segundos.</p>
         </div>
         <div class="step">
           <div class="num">2</div>
-          <h3>Defina os vencimentos</h3>
-          <p>Informe a data e o valor de cada conta para montar seu calendário.</p>
+          <h3>Adicione suas contas</h3>
+          <p>Cadastre boletos, assinaturas e despesas recorrentes.</p>
         </div>
         <div class="step">
           <div class="num">3</div>
-          <h3>Receba os lembretes</h3>
-          <p>Avisos automáticos chegam antes do vencimento para você pagar em dia.</p>
+          <h3>Defina seu orçamento</h3>
+          <p>Estabeleça metas e limites por categoria de gasto.</p>
         </div>
         <div class="step">
           <div class="num">4</div>
-          <h3>Acompanhe o mês</h3>
-          <p>Veja o painel atualizado com o que já foi pago e o que ainda falta.</p>
+          <h3>Acompanhe e decida</h3>
+          <p>Veja relatórios em tempo real e tome decisões inteligentes.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Pricing -->
-  <section id="planos" class="pricing">
+  <!-- Planos -->
+  <section id="planos" class="plans">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Planos</span>
-        <h2>Escolha o plano ideal para o seu controle</h2>
-        <p>Sem fidelidade, sem letras miúdas. Comece hoje e organize suas contas fixas com tranquilidade.</p>
+        <div class="eyebrow">Planos</div>
+        <h2>Escolha o plano ideal para você</h2>
+        <p>Sem fidelidade. Cancele quando quiser. Pagamento seguro via Asaas.</p>
       </div>
+      <div class="plans-grid">
 
-      <div class="price-grid">
         <!-- Plano Essencial -->
         <div class="plan">
-          <h3>Essencial</h3>
-          <p class="desc">Para quem quer organizar as contas principais do mês.</p>
+          <h3>Plano Essencial</h3>
+          <p class="sub">Para quem quer organizar o essencial.</p>
           <div class="price">
-            <span class="currency">R$</span>
-            <span class="amount">15</span>
-            <span class="period">/mês</span>
+            <span class="cur">R$</span>
+            <span class="val">29</span>
+            <span class="per">/mês</span>
           </div>
-          <p class="price-note">Cobrança mensal, cancele quando quiser.</p>
           <ul>
-            <li><span class="check">✓</span> Até 10 contas fixas cadastradas</li>
-            <li><span class="check">✓</span> Calendário de vencimentos</li>
-            <li><span class="check">✓</span> Lembretes por e-mail e notificação</li>
-            <li><span class="check">✓</span> Painel mensal de pagamentos</li>
+            <li><span class="check">✓</span> Gestão de até 30 contas por mês</li>
+            <li><span class="check">✓</span> Lembretes automáticos de vencimento</li>
+            <li><span class="check">✓</span> Painel financeiro básico</li>
             <li><span class="check">✓</span> Suporte por e-mail</li>
+            <li><span class="check">✓</span> Acesso via celular e web</li>
           </ul>
-          <a href="#" class="btn btn-ghost btn-block">Assinar Essencial</a>
+          <a href="https://www.asaas.com/c/vm75qru4csgar6xa" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Assinar Essencial</a>
         </div>
 
         <!-- Plano Plus -->
         <div class="plan featured">
-          <span class="plan-tag">Mais popular</span>
-          <h3>Plus</h3>
-          <p class="desc">Para quem quer controle total, sem limites de contas.</p>
+          <h3>Plano Plus</h3>
+          <p class="sub">Para quem quer controle total e avançado.</p>
           <div class="price">
-            <span class="currency">R$</span>
-            <span class="amount">29</span>
-            <span class="period">/mês</span>
+            <span class="cur">R$</span>
+            <span class="val">59</span>
+            <span class="per">/mês</span>
           </div>
-          <p class="price-note">Cobrança mensal, cancele quando quiser.</p>
           <ul>
-            <li><span class="check">✓</span> Contas fixas ilimitadas</li>
-            <li><span class="check">✓</span> Calendário e linha do tempo avançada</li>
-            <li><span class="check">✓</span> Lembretes inteligentes prioritários</li>
-            <li><span class="check">✓</span> Painel e relatórios mensais detalhados</li>
-            <li><span class="check">✓</span> Categorias e etiquetas personalizadas</li>
-            <li><span class="check">✓</span> Suporte prioritário</li>
+            <li><span class="check">✓</span> Contas ilimitadas</li>
+            <li><span class="check">✓</span> Relatórios avançados e exportação</li>
+            <li><span class="check">✓</span> Metas e orçamentos inteligentes</li>
+            <li><span class="check">✓</span> Integrações e backups automáticos</li>
+            <li><span class="check">✓</span> Suporte prioritário em todos os canais</li>
+            <li><span class="check">✓</span> Indicação premiada ativada</li>
           </ul>
-          <a href="#" class="btn btn-primary btn-block">Assinar Plus</a>
+          <a href="https://www.asaas.com/c/cl1s151715642sjm" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Assinar Plus</a>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Referral banner -->
+  <!-- Indicação -->
   <section id="indicacao">
     <div class="container">
-      <div class="referral">
-        <div>
-          <span class="eyebrow">Indique e ganhe</span>
-          <h2>Convide amigos e ganhe 1 mês grátis</h2>
-          <p>Compartilhe seu código de indicação. A cada amigo que assinar um plano, você ganha um mês grátis e ele também ganha um desconto de boas-vindas.</p>
-        </div>
-        <div class="referral-cta">
-          <div class="referral-code">
-            <div class="label">Seu código</div>
-            <div class="code">CONTROLE10</div>
+      <div class="refer">
+        <div class="refer-grid">
+          <div>
+            <div class="eyebrow" style="color:var(--gold-soft)">Programa de indicação</div>
+            <h2>Indique amigos e <span>ganhe recompensas</span></h2>
+            <p>A cada amigo que assinar um plano pago através do seu link, você ganha créditos reais para usar na plataforma. Quanto mais indica, mais economiza.</p>
+            <a href="#planos" class="btn btn-gold">Participar da indicação</a>
           </div>
-          <a href="#" class="btn btn-gold btn-block">Compartilhar código</a>
+          <div class="refer-card">
+            <div class="reward">R$ 30<small>de crédito por indicação convertida</small></div>
+            <div class="row"><span>Indicações ativas</span><strong>07</strong></div>
+            <div class="row"><span>Créditos acumulados</span><strong>R$ 210</strong></div>
+            <div class="row"><span>Próximo resgate em</span><strong>3 dias</strong></div>
+          </div>
         </div>
       </div>
     </div>
@@ -851,10 +461,10 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="#" class="brand">
-            <span class="brand-mark">P</span>
+            <span class="logo">P</span>
             Pague com Controle
           </a>
-          <p>O jeito mais elegante de organizar, acompanhar e pagar suas contas fixas com controle total.</p>
+          <p>A plataforma premium para quem quer pagar, planejar e prosperar com total controle financeiro.</p>
         </div>
         <div class="footer-col">
           <h4>Produto</h4>
@@ -866,11 +476,12 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Suporte</h4>
+          <h4>Empresa</h4>
           <ul>
-            <li><a href="#">Central de ajuda</a></li>
-            <li><a href="#">Fale conosco</a></li>
-            <li><a href="#">Status do serviço</a></li>
+            <li><a href="#">Sobre nós</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Carreira</a></li>
+            <li><a href="#">Contato</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -879,15 +490,37 @@
             <li><a href="#">Termos de uso</a></li>
             <li><a href="#">Privacidade</a></li>
             <li><a href="#">Cookies</a></li>
+            <li><a href="#">LGPD</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© 2025 Pague com Controle. Todos os direitos reservados.</span>
-        <span>Feito com controle no Brasil.</span>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="YouTube">YT</a>
+        </div>
       </div>
     </div>
   </footer>
 
+  <script>
+    // Menu mobile simples
+    const toggle=document.querySelector('.menu-toggle');
+    const links=document.querySelector('.nav-links');
+    toggle.addEventListener('click',()=>{
+      links.style.display = links.style.display==='flex'?'none':'flex';
+      links.style.flexDirection='column';
+      links.style.position='absolute';
+      links.style.top='74px';
+      links.style.left='0';
+      links.style.right='0';
+      links.style.background='#fff';
+      links.style.padding='20px 24px';
+      links.style.boxShadow='0 12px 30px rgba(6,40,27,.12)';
+    });
+  </script>
 </body>
 </html>
