@@ -1,387 +1,459 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>P - Internet sem complicação</title>
-  <meta name="description" content="Planos de internet simples e transparentes. Essencial R$ 15 e Plus R$ 29." />
-  <style>
-    :root {
-      --brand: #4F46E5;
-      --brand-dark: #4338CA;
-      --text: #111827;
-      --muted: #6B7280;
-      --bg: #FFFFFF;
-      --bg-soft: #F9FAFB;
-      --border: #E5E7EB;
-      --radius: 14px;
-      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.06);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pague com Controle - Organize suas contas fixas</title>
+<meta name="description" content="Controle suas contas fixas mensais com simplicidade. Planos a partir de R$ 15. Indique amigos e ganhe desconto.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f8f9fa;
+    --text: #333333;
+    --text-soft: #5c6360;
+    --green: #2e9e5b;
+    --green-dark: #1f7a45;
+    --green-light: #e6f4ec;
+    --border: #e5e7eb;
+    --shadow: 0 10px 30px rgba(0,0,0,0.06);
+  }
 
-    * { box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-    a { color: var(--brand); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; color: var(--text); }
+  .logo-mark {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--green); color: #fff;
+    display: grid; place-items: center; font-size: 18px;
+  }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { color: var(--text-soft); font-weight: 500; font-size: 15px; transition: color .2s; }
+  .nav-links a:hover { color: var(--green-dark); }
+  
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 22px; border-radius: 10px; font-weight: 700; font-size: 15px;
+    cursor: pointer; border: none; transition: transform .15s, box-shadow .2s, background .2s;
+  }
+  .btn-primary { background: var(--green); color: #fff; box-shadow: 0 6px 18px rgba(46,158,91,0.25); }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--green-dark); border: 2px solid var(--green); }
+  .btn-outline:hover { background: var(--green-light); }
+  .btn-block { width: 100%; }
 
-    .container {
-      width: 100%;
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+  /* Hero */
+  .hero { padding: 80px 0 64px; background: linear-gradient(180deg, var(--bg-soft) 0%, #ffffff 100%); }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-light); color: var(--green-dark);
+    padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 700; margin-bottom: 20px;
+  }
+  h1 { font-size: 44px; line-height: 1.15; font-weight: 800; margin-bottom: 18px; color: var(--text); }
+  .hero p.lead { font-size: 18px; color: var(--text-soft); margin-bottom: 28px; max-width: 520px; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  
+  .hero-trust { margin-top: 28px; display: flex; gap: 24px; flex-wrap: wrap; color: var(--text-soft); font-size: 14px; }
+  .hero-trust span { display: inline-flex; align-items: center; gap: 8px; }
 
-    /* Header */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: saturate(180%) blur(8px);
-      border-bottom: 1px solid var(--border);
-    }
+  .hero-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 18px;
+    padding: 24px; box-shadow: var(--shadow);
+  }
+  .hero-card h3 { font-size: 16px; margin-bottom: 16px; color: var(--text); }
+  .bill-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed var(--border); }
+  .bill-row:last-child { border-bottom: none; }
+  .bill-name { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+  .bill-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--green-light); color: var(--green-dark);
+    display: grid; place-items: center; font-size: 16px;
+  }
+  .bill-status { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+  .status-paid { background: var(--green-light); color: var(--green-dark); }
+  .status-pending { background: #fff4e5; color: #b76e00; }
+  .hero-card-total {
+    margin-top: 16px; background: var(--green-light); border-radius: 12px;
+    padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; font-weight: 700;
+  }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-    }
+  /* Section base */
+  section { padding: 72px 0; }
+  .section-head { text-align: center; max-width: 680px; margin: 0 auto 48px; }
+  .section-head h2 { font-size: 34px; font-weight: 800; margin-bottom: 12px; }
+  .section-head p { color: var(--text-soft); font-size: 17px; }
+  .eyebrow { color: var(--green-dark); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 13px; margin-bottom: 10px; }
 
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--text);
-    }
-    .logo:hover { text-decoration: none; }
+  /* Features */
+  .features { background: var(--bg-soft); }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .feature {
+    background: #fff; border: 1px solid var(--border); border-radius: 16px;
+    padding: 28px; transition: transform .2s, box-shadow .2s;
+  }
+  .feature:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--green-light); color: var(--green-dark);
+    display: grid; place-items: center; font-size: 22px; margin-bottom: 16px;
+  }
+  .feature h3 { font-size: 19px; margin-bottom: 8px; }
+  .feature p { color: var(--text-soft); font-size: 15px; }
 
-    .logo-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--brand);
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: 0.5px;
-    }
+  /* Plans */
+  .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 880px; margin: 0 auto; }
+  .plan {
+    background: #fff; border: 1px solid var(--border); border-radius: 20px;
+    padding: 32px; position: relative; transition: box-shadow .2s, transform .2s;
+    display: flex; flex-direction: column;
+  }
+  .plan:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+  .plan.featured { border: 2px solid var(--green); box-shadow: 0 12px 40px rgba(46,158,91,0.12); }
+  .plan-tag {
+    position: absolute; top: -14px; left: 32px;
+    background: var(--green); color: #fff; font-size: 12px; font-weight: 800;
+    padding: 6px 14px; border-radius: 999px; text-transform: uppercase; letter-spacing: .05em;
+  }
+  .plan h3 { font-size: 22px; margin-bottom: 6px; }
+  .plan .plan-desc { color: var(--text-soft); font-size: 14px; margin-bottom: 18px; }
+  .plan-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 22px; }
+  .plan-price .currency { font-size: 20px; font-weight: 700; color: var(--text-soft); }
+  .plan-price .amount { font-size: 44px; font-weight: 800; color: var(--text); }
+  .plan-price .period { font-size: 15px; color: var(--text-soft); }
+  .plan-features { list-style: none; margin-bottom: 26px; flex: 1; }
+  .plan-features li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; font-size: 15px; color: var(--text); }
+  .plan-features li::before { content: '✓'; color: var(--green); font-weight: 800; flex-shrink: 0; }
+  .plan .btn { margin-top: auto; }
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
+  /* Referral */
+  .referral { background: var(--bg-soft); }
+  .referral-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 20px;
+    padding: 40px; max-width: 920px; margin: 0 auto; box-shadow: var(--shadow);
+  }
+  .referral-rules {
+    background: var(--green-light); border-left: 4px solid var(--green);
+    border-radius: 10px; padding: 18px 20px; margin: 24px 0 32px;
+  }
+  .referral-rules ul { list-style: none; }
+  .referral-rules li { display: flex; gap: 10px; padding: 6px 0; font-size: 15px; color: var(--text); }
+  .referral-rules li::before { content: '•'; color: var(--green-dark); font-weight: 800; }
+  .examples-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .example { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+  .example h4 { font-size: 15px; color: var(--green-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .calc-line { display: flex; justify-content: space-between; font-size: 14px; padding: 4px 0; color: var(--text-soft); }
+  .calc-line.total { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 10px; font-weight: 800; color: var(--text); font-size: 16px; }
+  .calc-line.zero { color: var(--green-dark); }
 
-    .nav-links a {
-      color: var(--muted);
-      font-size: 15px;
-    }
-    .nav-links a:hover { color: var(--text); text-decoration: none; }
+  /* FAQ */
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 14px; background: #fff; overflow: hidden; }
+  .faq-q {
+    width: 100%; text-align: left; background: transparent; border: none;
+    padding: 18px 22px; font-size: 16px; font-weight: 700; color: var(--text);
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq-q .icon { color: var(--green); font-size: 20px; transition: transform .2s; }
+  .faq-item.open .faq-q .icon { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .25s ease; color: var(--text-soft); font-size: 15px; }
+  .faq-a-inner { padding: 0 22px 20px; }
+  .faq-item.open .faq-a { max-height: 240px; }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-      text-decoration: none;
-    }
-    .btn:hover { text-decoration: none; }
+  /* CTA final */
+  .final-cta { background: var(--green-light); text-align: center; }
+  .final-cta h2 { font-size: 32px; margin-bottom: 12px; }
+  .final-cta p { color: var(--text-soft); margin-bottom: 24px; font-size: 17px; }
 
-    .btn-primary {
-      background: var(--brand);
-      color: #fff;
-    }
-    .btn-primary:hover { background: var(--brand-dark); color: #fff; }
+  /* Footer */
+  footer { background: #fff; border-top: 1px solid var(--border); padding: 40px 0; color: var(--text-soft); font-size: 14px; }
+  .footer-grid { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a:hover { color: var(--green-dark); }
 
-    .btn-outline {
-      background: #fff;
-      color: var(--text);
-      border-color: var(--border);
-    }
-    .btn-outline:hover { border-color: var(--brand); color: var(--brand); }
-
-    /* Hero */
-    .hero {
-      padding: 72px 0 56px;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: clamp(28px, 5vw, 44px);
-      line-height: 1.15;
-      margin: 0 0 16px;
-      letter-spacing: -0.02em;
-    }
-    .hero p {
-      color: var(--muted);
-      font-size: clamp(16px, 2.2vw, 19px);
-      max-width: 640px;
-      margin: 0 auto 28px;
-    }
-    .hero-cta {
-      display: inline-flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    /* Section */n    section.block { padding: 56px 0; }
-    .block-title {
-      text-align: center;
-      margin-bottom: 36px;
-    }
-    .block-title h2 {
-      font-size: clamp(24px, 3.5vw, 32px);
-      margin: 0 0 8px;
-      letter-spacing: -0.01em;
-    }
-    .block-title p { color: var(--muted); margin: 0; }
-
-    /* Plans */
-    .plans {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-    .plan {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      background: #fff;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-    }
-    .plan-name {
-      font-weight: 700;
-      font-size: 18px;
-      margin: 0 0 6px;
-    }
-    .plan-price {
-      font-size: 34px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin: 0 0 4px;
-    }
-    .plan-price small {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--muted);
-    }
-    .plan-desc {
-      color: var(--muted);
-      margin: 0 0 18px;
-      font-size: 15px;
-    }
-    .plan-features {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 22px;
-      display: grid;
-      gap: 10px;
-    }
-    .plan-features li {
-      position: relative;
-      padding-left: 26px;
-      font-size: 15px;
-      color: var(--text);
-    }
-    .plan-features li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 7px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--brand);
-      opacity: 0.15;
-    }
-    .plan-features li::after {
-      content: "";
-      position: absolute;
-      left: 5px;
-      top: 11px;
-      width: 6px;
-      height: 3px;
-      border-left: 2px solid var(--brand);
-      border-bottom: 2px solid var(--brand);
-      transform: rotate(-45deg);
-    }
-    .plan .btn { margin-top: auto; width: 100%; }
-
-    /* Referral */
-    .referral {
-      background: var(--bg-soft);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .referral-card {
-      max-width: 760px;
-      margin: 0 auto;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px 40px;
-      box-shadow: var(--shadow);
-    }
-    .referral-card h3 {
-      margin: 0 0 10px;
-      font-size: 22px;
-      letter-spacing: -0.01em;
-    }
-    .referral-card p {
-      color: var(--muted);
-      margin: 0 0 14px;
-    }
-    .referral-note {
-      background: #EEF2FF;
-      border: 1px solid #E0E7FF;
-      border-radius: 10px;
-      padding: 14px 16px;
-      color: #3730A3;
-      font-size: 14.5px;
-      margin-top: 6px;
-    }
-    .referral-note strong { color: #312E81; }
-
-    /* Footer */
-    .site-footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 0;
-      color: var(--muted);
-      font-size: 14px;
-      text-align: center;
-    }
-
-    /* Mobile */
-    @media (max-width: 640px) {
-      .nav { height: 60px; }
-      .nav-links { gap: 10px; }
-      .nav-links a:not(.btn) { display: none; }
-      .hero { padding: 48px 0 36px; }
-      .plans { grid-template-columns: 1fr; }
-      .referral-card {
-        padding: 22px 18px;
-      }
-      .referral-card h3 { font-size: 20px; }
-      .referral-note { font-size: 14px; padding: 12px 14px; }
-    }
-  </style>
+  /* Mobile */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .examples-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 34px; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 640px) {
+    .referral-card { padding: 24px 20px; }
+    .hero { padding: 40px 0; }
+    section { padding: 48px 0; }
+  }
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav">
-      <a class="logo" href="#top" aria-label="P - Página inicial">
-        <span class="logo-mark" aria-hidden="true">P</span>
-        <span>P</span>
-      </a>
-      <nav class="nav-links" aria-label="Navegação principal">
-        <a href="#planos">Planos</a>
-        <a href="#indicacao">Indicação</a>
-        <a class="btn btn-outline" href="https://app.p.com/login" rel="noopener">Entrar</a>
-      </nav>
-    </div>
-  </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container">
-        <h1>Internet simples, transparente e sem surpresas.</h1>
-        <p>Escolha um plano direto. Pague pelo valor combinado. Indique amigos e reduza o valor da sua mensalidade.</p>
+<header>
+  <div class="container nav">
+    <a href="#" class="logo">
+      <span class="logo-mark">P</span>
+      Pague com Controle
+    </a>
+    <nav class="nav-links">
+      <a href="#recursos">Recursos</a>
+      <a href="#planos">Planos</a>
+      <a href="#indicacao">Indicação</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://www.asaas.com/login" target="_blank" class="btn btn-outline">Entrar</a>
+      <a href="#planos" class="btn btn-primary">Assinar agora</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge">● Suas contas fixas, sob controle</span>
+        <h1>Pague suas contas fixas sem perder o controle do orçamento</h1>
+        <p class="lead">Centralize luz, água, internet, streaming e mensalidades em um só lugar. Acompanhe o que já foi pago e saiba exatamente quanto falta.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#planos">Ver planos</a>
-          <a class="btn btn-outline" href="https://app.p.com/login" rel="noopener">Já sou cliente</a>
+          <a href="#planos" class="btn btn-primary">Ver planos</a>
+          <a href="#indicacao" class="btn btn-outline">Como ganhar desconto</a>
+        </div>
+        <div class="hero-trust">
+          <span>✓ Teste por 45 dias</span>
+          <span>✓ Cancele quando quiser</span>
+          <span>✓ Indique e pague menos</span>
         </div>
       </div>
-    </section>
 
-    <section class="block" id="planos">
-      <div class="container">
-        <div class="block-title">
-          <h2>Planos</h2>
-          <p>Sem fidelidade. Sem taxa de adesão.</p>
+      <div class="hero-card">
+        <h3>Resumo do mês</h3>
+        <div class="bill-row">
+          <div class="bill-name"><span class="bill-icon">💡</span> Energia</div>
+          <span class="bill-status status-paid">Pago</span>
         </div>
-        <div class="plans">
-          <article class="plan">
-            <h3 class="plan-name">Essencial</h3>
-            <p class="plan-price">R$ 15 <small>/mês</small></p>
-            <p class="plan-desc">Para uso individual do dia a dia.</p>
-            <ul class="plan-features">
-              <li>Internet estável para navegação</li>
-              <li>Ideal para mensagens e redes sociais</li>
-              <li>Sem fidelidade</li>
-              <li>Suporte por chat</li>
-            </ul>
-            <a class="btn btn-primary" href="https://www.asaas.com/c/essencial" rel="noopener noreferrer" target="_blank">Assinar Essencial</a>
-          </article>
-
-          <article class="plan">
-            <h3 class="plan-name">Plus</h3>
-            <p class="plan-price">R$ 29 <small>/mês</small></p>
-            <p class="plan-desc">Para quem usa mais e quer estabilidade.</p>
-            <ul class="plan-features">
-              <li>Mais velocidade e estabilidade</li>
-              <li>Ideal para streaming e videochamadas</li>
-              <li>Sem fidelidade</li>
-              <li>Suporte prioritário</li>
-            </ul>
-            <a class="btn btn-primary" href="https://www.asaas.com/c/plus" rel="noopener noreferrer" target="_blank">Assinar Plus</a>
-          </article>
+        <div class="bill-row">
+          <div class="bill-name"><span class="bill-icon">💧</span> Água</div>
+          <span class="bill-status status-paid">Pago</span>
+        </div>
+        <div class="bill-row">
+          <div class="bill-name"><span class="bill-icon">🌐</span> Internet</div>
+          <span class="bill-status status-pending">Pendente</span>
+        </div>
+        <div class="bill-row">
+          <div class="bill-name"><span class="bill-icon">📺</span> Streaming</div>
+          <span class="bill-status status-pending">Pendente</span>
+        </div>
+        <div class="hero-card-total">
+          <span>Resta pagar</span>
+          <span>R$ 189,90</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="block referral" id="indicacao">
-      <div class="container">
-        <div class="block-title">
-          <h2>Indique e ganhe desconto</h2>
-          <p>Quanto mais amigos você indica, menor fica a sua mensalidade.</p>
+  <section id="recursos" class="features">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Recursos</div>
+        <h2>Tudo o que você precisa para organizar suas contas</h2>
+        <p>Simples, direto e feito para o dia a dia de quem quer pagar em dia e nunca mais esquecer uma conta.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">📋</div>
+          <h3>Cadastro de contas fixas</h3>
+          <p>Adicione suas contas recorrentes com valor e vencimento. Tudo fica visível em um painel único.</p>
         </div>
-        <div class="referral-card">
-          <h3>Como funciona</h3>
-          <p>
-            A cada amigo que assinar um plano usando o seu link de indicação, você recebe um desconto
-            que é <strong>somado</strong> ao total de benefícios do mês atual.
-          </p>
-          <div class="referral-note">
-            <strong>Importante:</strong> se o desconto ultrapassar o valor da sua mensalidade, o valor
-            excedente <strong>não vira dinheiro</strong> e <strong>não fica guardado para o mês seguinte</strong>.
-            O benefício máximo é <strong>zerar a fatura do mês atual</strong>.
+        <div class="feature">
+          <div class="feature-icon">📊</div>
+          <h3>Acompanhamento mensal</h3>
+          <p>Veja o total já pago e o que ainda falta. Acompanhe seu progresso e mantenha o orçamento no azul.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">👥</div>
+          <h3>Indicação de amigos</h3>
+          <p>Convide amigos e ganhe R$ 1 de desconto por indicação ativa. Quanto mais indica, menos paga.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="planos">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Planos</div>
+        <h2>Escolha o plano ideal para você</h2>
+        <p>Preços fixos, sem surpresas. Comece pequeno ou vá para o ilimitado — você decide.</p>
+      </div>
+
+      <div class="plans-grid">
+        <div class="plan">
+          <h3>Essencial</h3>
+          <p class="plan-desc">Para quem está começando a organizar as contas da casa.</p>
+          <div class="plan-price">
+            <span class="currency">R$</span>
+            <span class="amount">15</span>
+            <span class="period">/mês</span>
+          </div>
+          <ul class="plan-features">
+            <li>Até 10 contas fixas cadastradas</li>
+            <li>Card mensal com renda e sobra</li>
+            <li>Status No azul</li>
+            <li>Indicação de amigos (R$ 1 por ativa)</li>
+            <li>Suporte por e-mail</li>
+            <li>Acesso via celular e web</li>
+          </ul>
+          <a href="https://www.asaas.com/c/vm75qru4csgar6xa" target="_blank" rel="noopener" class="btn btn-outline btn-block">Assinar Essencial</a>
+        </div>
+
+        <div class="plan featured">
+          <span class="plan-tag">Mais popular</span>
+          <h3>Plus</h3>
+          <p class="plan-desc">Para quem quer registrar todas as contas, sem limite.</p>
+          <div class="plan-price">
+            <span class="currency">R$</span>
+            <span class="amount">29</span>
+            <span class="period">/mês</span>
+          </div>
+          <ul class="plan-features">
+            <li>Tudo do plano Essencial</li>
+            <li>Contas fixas ILIMITADAS</li>
+            <li>Card mensal com renda e sobra</li>
+            <li>Status No azul</li>
+            <li>Indicação de amigos (R$ 1 por ativa)</li>
+            <li>Suporte prioritário via WhatsApp</li>
+          </ul>
+          <a href="https://www.asaas.com/c/cl1s151715642sjm" target="_blank" rel="noopener" class="btn btn-primary btn-block">Assinar Plus</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="indicacao" class="referral">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Indicação</div>
+        <h2>Indique amigos e pague menos</h2>
+        <p>A cada amigo que assinar um plano e manter a assinatura ativa, você ganha R$ 1 de desconto na sua fatura.</p>
+      </div>
+
+      <div class="referral-card">
+        <div class="referral-rules">
+          <ul>
+            <li><strong>Desconto de R$ 1</strong> por indicação ativa, aplicado na sua fatura mensal.</li>
+            <li>O desconto é <strong>somado</strong>: quanto mais amigos ativos, maior o desconto no mês.</li>
+            <li>O desconto vale <strong>até zerar a fatura</strong> do mês.</li>
+            <li><strong>Não há devolução em dinheiro</strong>: se o desconto ultrapassar o valor da sua mensalidade, o valor excedente não vira dinheiro e não fica guardado para o mês seguinte. O benefício máximo é zerar a fatura do mês atual.</li>
+          </ul>
+        </div>
+
+        <h3 style="margin-bottom:16px;">Exemplos de cálculo</h3>
+        <div class="examples-grid">
+          <div class="example">
+            <h4>👤 Essencial · 5 indicações</h4>
+            <div class="calc-line"><span>Valor do plano</span><span>R$ 15,00</span></div>
+            <div class="calc-line"><span>Desconto (5 × R$ 1)</span><span>- R$ 5,00</span></div>
+            <div class="calc-line total"><span>Você paga</span><span>R$ 10,00</span></div>
+          </div>
+
+          <div class="example">
+            <h4>👥 Essencial · 15 indicações</h4>
+            <div class="calc-line"><span>Valor do plano</span><span>R$ 15,00</span></div>
+            <div class="calc-line"><span>Desconto (15 × R$ 1)</span><span>- R$ 15,00</span></div>
+            <div class="calc-line total zero"><span>Você paga</span><span>R$ 0,00</span></div>
+          </div>
+
+          <div class="example">
+            <h4>⭐ Plus · 29 indicações</h4>
+            <div class="calc-line"><span>Valor do plano</span><span>R$ 29,00</span></div>
+            <div class="calc-line"><span>Desconto (29 × R$ 1)</span><span>- R$ 29,00</span></div>
+            <div class="calc-line total zero"><span>Você paga</span><span>R$ 0,00</span></div>
           </div>
         </div>
       </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      © <span id="year"></span> P — Internet sem complicação.
     </div>
-  </footer>
+  </section>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Dúvidas</div>
+        <h2>Perguntas frequentes</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Como funciona a indicação? <span class="icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner"><br>Você compartilha seu link. A cada amigo que assinar e mantiver a assinatura ativa, você ganha R$ 1 de desconto na sua fatura, somando até zerar o valor do mês.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Se eu zerar a fatura, recebo o restante em dinheiro? <span class="icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner"><br>Não. O desconto serve apenas para abater o valor da sua fatura até zerá-la. Não há devolução em dinheiro, transferência ou acumulação para meses seguintes.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Como faço para cancelar? <span class="icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner"><br>Você pode cancelar quando quiser, direto pela plataforma de pagamento. Não há multa nem fidelidade.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="container">
+      <h2 style="padding-top: 40px;">Comece a pagar com controle hoje</h2>
+      <p>Escolha seu plano e organize suas contas fixas em minutos.</p>
+      <a href="#planos" class="btn btn-primary" style="margin-bottom: 40px;">Ver planos e assinar</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <div class="logo" style="margin-bottom:6px;">
+        <span class="logo-mark">P</span> Pague com Controle
+      </div>
+      <p>Organize suas contas fixas com simplicidade.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#recursos">Recursos</a>
+      <a href="#planos">Planos</a>
+      <a href="#indicacao">Indicação</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+  <div class="container" style="margin-top:20px; font-size:13px; color:var(--text-soft);">
+    © <span id="year"></span> Pague com Controle. Todos os direitos reservados.
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
 </body>
 </html>
