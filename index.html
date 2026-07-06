@@ -1,511 +1,605 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pague com Controle — Controle suas contas fixas com clareza</title>
-<meta name="description" content="Organize suas contas fixas, receba lembretes no WhatsApp e pague sem atrasos. Cobrança só após 45 dias.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2316a34a'/%3E%3Ctext x='50' y='72' font-family='Arial,sans-serif' font-size='64' font-weight='bold' fill='white' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --green: #16a34a;
-    --green-dark: #15803d;
-    --green-light: #dcfce7;
-    --green-soft: #f0fdf4;
-    --bg: #ffffff;
-    --bg-soft: #f8faf9;
-    --text: #0f172a;
-    --text-sec: #475569;
-    --border: #e2e8f0;
-    --dark: #0f172a;
-    --red-soft: #ef4444;
-  }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-  }
-  a { text-decoration: none; color: inherit; }
-  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-
-  /* Header */
-  header {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: saturate(180%) blur(12px);
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-  .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 18px; color: var(--text); }
-  .logo {
-    width: 38px; height: 38px; border-radius: 10px;
-    background: var(--green); color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 22px;
-    box-shadow: 0 4px 10px rgba(22,163,74,0.25);
-  }
-  .nav-links { display: flex; align-items: center; gap: 28px; }
-  .nav-links a { color: var(--text-sec); font-weight: 500; font-size: 15px; transition: color .2s; }
-  .nav-links a:hover { color: var(--green); }
-  .nav-actions { display: flex; align-items: center; gap: 12px; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 18px; border-radius: 10px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all .2s; border: none; }
-  .btn-primary { background: var(--green); color: #fff; }
-  .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(22,163,74,0.25); }
-  .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
-  .btn-outline:hover { border-color: var(--green); color: var(--green); }
-  .btn-lg { padding: 14px 26px; font-size: 16px; }
-  .mobile-toggle { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text); }
-
-  /* Hero */
-  .hero { padding: 80px 0 90px; background: linear-gradient(180deg, var(--green-soft) 0%, var(--bg) 100%); }
-  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
-  .hero h1 { font-size: 44px; line-height: 1.15; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 20px; }
-  .hero h1 span { color: var(--green); }
-  .hero .lead { font-size: 18px; color: var(--text-sec); margin-bottom: 28px; max-width: 520px; }
-  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
-  .badges { display: flex; flex-wrap: wrap; gap: 10px; }
-  .badge { background: var(--green-light); color: var(--green-dark); padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; }
-
-  /* Hero card */
-  .hero-card {
-    background: #fff; border-radius: 20px; padding: 28px;
-    box-shadow: 0 20px 50px rgba(15,23,42,0.10); border: 1px solid var(--border);
-  }
-  .hero-card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-  .hero-card-head h3 { font-size: 16px; font-weight: 700; }
-  .hero-card-head .month { font-size: 13px; color: var(--text-sec); }
-  .bill { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-radius: 12px; background: var(--bg-soft); margin-bottom: 10px; border: 1px solid var(--border); }
-  .bill-left { display: flex; align-items: center; gap: 12px; }
-  .bill-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 18px; }
-  .bill-name { font-weight: 600; font-size: 15px; }
-  .bill-date { font-size: 12px; color: var(--text-sec); }
-  .bill-price { font-weight: 700; font-size: 15px; }
-  .status { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
-  .status.paid { background: var(--green-light); color: var(--green-dark); }
-  .status.pending { background: #fef9c3; color: #a16207; }
-  .status.soon { background: #e0f2fe; color: #0369a1; }
-
-  /* Sections */
-  section { padding: 80px 0; }
-  .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
-  .section-head .eyebrow { color: var(--green); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-  .section-head h2 { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 14px; }
-  .section-head p { color: var(--text-sec); font-size: 17px; }
-
-  /* Features */
-  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .feature-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px; box-shadow: 0 4px 14px rgba(15,23,42,0.04); transition: transform .2s, box-shadow .2s; }
-  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(15,23,42,0.08); }
-  .feature-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 18px; }
-  .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-  .feature-card p { color: var(--text-sec); font-size: 15px; }
-
-  /* How it works */
-  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .step { text-align: center; }
-  .step-num { width: 48px; height: 48px; border-radius: 50%; background: var(--green); color: #fff; font-weight: 800; font-size: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 6px 16px rgba(22,163,74,0.25); }
-  .step h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
-  .step p { color: var(--text-sec); font-size: 14px; }
-
-  /* Plans */
-  .plans { background: var(--bg-soft); }
-  .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 820px; margin: 0 auto; }
-  .plan { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 32px; position: relative; box-shadow: 0 6px 20px rgba(15,23,42,0.05); }
-  .plan.featured { border: 2px solid var(--green); box-shadow: 0 16px 40px rgba(22,163,74,0.15); }
-  .plan-tag { position: absolute; top: -14px; right: 24px; background: var(--green); color: #fff; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 999px; }
-  .plan h3 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
-  .plan .plan-desc { color: var(--text-sec); font-size: 14px; margin-bottom: 18px; }
-  .plan-price { font-size: 40px; font-weight: 800; margin-bottom: 4px; }
-  .plan-price small { font-size: 16px; font-weight: 500; color: var(--text-sec); }
-  .plan .plan-billing { font-size: 13px; color: var(--text-sec); margin-bottom: 22px; }
-  .plan ul { list-style: none; margin-bottom: 26px; }
-  .plan ul li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; font-size: 15px; color: var(--text); }
-  .plan ul li::before { content: '✓'; color: var(--green); font-weight: 800; }
-  .plan .btn { width: 100%; }
-
-  /* Referral */
-  .referral { background: var(--green-light); border-radius: 24px; padding: 56px; }
-  .referral-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-  .referral h2 { font-size: 30px; font-weight: 800; margin-bottom: 14px; }
-  .referral p { color: var(--text-sec); font-size: 16px; margin-bottom: 18px; }
-  .referral ul { list-style: none; }
-  .referral ul li { display: flex; gap: 10px; padding: 6px 0; font-weight: 500; }
-  .referral ul li::before { content: '🤝'; }
-  .referral-card { background: #fff; border-radius: 16px; padding: 28px; box-shadow: 0 12px 30px rgba(15,23,42,0.08); }
-  .referral-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
-  .ref-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed var(--border); font-size: 15px; }
-  .ref-row:last-child { border-bottom: none; font-weight: 700; color: var(--green-dark); }
-
-  /* FAQ */
-  .faq-list { max-width: 760px; margin: 0 auto; }
-  .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 14px; overflow: hidden; background: #fff; }
-  .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 20px 24px; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; color: var(--text); }
-  .faq-q .icon { font-size: 22px; color: var(--green); font-weight: 700; transition: transform .2s; }
-  .faq-item.open .faq-q .icon { transform: rotate(45deg); }
-  .faq-a { max-height: 0; overflow: hidden; transition: max-height .3s ease; padding: 0 24px; color: var(--text-sec); font-size: 15px; }
-  .faq-item.open .faq-a { max-height: 400px; padding: 0 24px 22px; }
-
-  /* Footer */
-  footer { background: var(--dark); color: #cbd5e1; padding: 64px 0 32px; }
-  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-  .footer-brand .brand { color: #fff; margin-bottom: 14px; }
-  .footer-brand p { font-size: 14px; color: #94a3b8; max-width: 320px; }
-  .footer-col h4 { color: #fff; font-size: 15px; font-weight: 700; margin-bottom: 16px; }
-  .footer-col ul { list-style: none; }
-  .footer-col ul li { margin-bottom: 10px; }
-  .footer-col ul li a { color: #cbd5e1; font-size: 14px; transition: color .2s; }
-  .footer-col ul li a:hover { color: var(--green); }
-  .footer-col ul li a.cancel-link { color: #fca5a5; }
-  .footer-col ul li a.cancel-link:hover { color: var(--red-soft); }
-  .footer-notice { font-size: 13px; color: #94a3b8; margin-top: 8px; line-height: 1.5; }
-  .footer-bottom { border-top: 1px solid #1e293b; padding-top: 24px; text-align: center; font-size: 13px; color: #64748b; }
-
-  /* Responsive */
-  @media (max-width: 900px) {
-    .hero-grid, .referral-grid { grid-template-columns: 1fr; gap: 36px; }
-    .features-grid { grid-template-columns: repeat(2, 1fr); }
-    .steps { grid-template-columns: repeat(2, 1fr); }
-    .plans-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-    .hero h1 { font-size: 34px; }
-  }
-  @media (max-width: 640px) {
-    .nav-links { display: none; }
-    .mobile-toggle { display: block; }
-    .nav-actions .btn-outline { display: none; }
-    .features-grid { grid-template-columns: 1fr; }
-    .steps { grid-template-columns: 1fr; }
-    .hero { padding: 48px 0 56px; }
-    section { padding: 56px 0; }
-    .referral { padding: 32px 24px; }
-    .hero h1 { font-size: 28px; }
-    .section-head h2 { font-size: 26px; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pague com Controle - Controle suas contas fixas</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2316a34a'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='60'>P</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            background-color: #ffffff;
+        }
+        .bg-soft {
+            background-color: #f8faf9;
+        }
+        .bg-green-light {
+            background-color: #dcfce7;
+        }
+        .text-primary {
+            color: #16a34a;
+        }
+        .bg-primary {
+            background-color: #16a34a;
+        }
+        .bg-primary-hover:hover {
+            background-color: #15803d;
+        }
+        .border-base {
+            border-color: #e2e8f0;
+        }
+        .rounded-custom {
+            border-radius: 18px;
+        }
+        .shadow-soft {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+        .btn-entrar-mobile {
+            display: flex !important;
+            padding: 6px 12px !important;
+            font-size: 13px !important;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 200px;
+        }
+        .accordion-item.active .icon-plus {
+            transform: rotate(45deg);
+        }
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="container nav">
-    <a href="#" class="brand">
-      <div class="logo">P</div>
-      <span>Pague com Controle</span>
-    </a>
-    <nav class="nav-links">
-      <a href="#recursos">Recursos</a>
-      <a href="#como-funciona">Como funciona</a>
-      <a href="#planos">Planos</a>
-      <a href="#indicacao">Indicação</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <div class="nav-actions">
-      <a href="login.html" class="btn btn-outline">Entrar</a>
-      <a href="#planos" class="btn btn-primary">Começar agora</a>
-      <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
-    </div>
-  </div>
-</header>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-base">
+        <div class="container mx-auto px-4 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">P</span>
+                </div>
+                <span class="font-bold text-xl tracking-tight">Pague com Controle</span>
+            </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <h1>Controle suas contas fixas com <span>clareza</span> e pague sem atrasos</h1>
-      <p class="lead">Organize aluguel, energia, internet e streaming em um só painel. Receba lembretes no WhatsApp e mantenha suas contas em dia sem dor de cabeça.</p>
-      <div class="hero-cta">
-        <a href="#planos" class="btn btn-primary btn-lg">Começar agora</a>
-        <a href="#como-funciona" class="btn btn-outline btn-lg">Ver como funciona</a>
-      </div>
-      <div class="badges">
-        <span class="badge">📊 Painel financeiro mensal</span>
-        <span class="badge">💬 Lembretes no WhatsApp</span>
-        <span class="badge">⏰ Cobrança só após 45 dias</span>
-      </div>
-    </div>
-    <div class="hero-card">
-      <div class="hero-card-head">
-        <h3>Suas contas do mês</h3>
-        <span class="month">Outubro 2025</span>
-      </div>
-      <div class="bill">
-        <div class="bill-left">
-          <div class="bill-icon">🏠</div>
-          <div>
-            <div class="bill-name">Aluguel</div>
-            <div class="bill-date">Vence 05/10</div>
-          </div>
-        </div>
-        <div style="text-align:right">
-          <div class="bill-price">R$ 1.200</div>
-          <span class="status paid">Pago</span>
-        </div>
-      </div>
-      <div class="bill">
-        <div class="bill-left">
-          <div class="bill-icon">⚡</div>
-          <div>
-            <div class="bill-name">Energia</div>
-            <div class="bill-date">Vence 12/10</div>
-          </div>
-        </div>
-        <div style="text-align:right">
-          <div class="bill-price">R$ 180</div>
-          <span class="status pending">Pendente</span>
-        </div>
-      </div>
-      <div class="bill">
-        <div class="bill-left">
-          <div class="bill-icon">📶</div>
-          <div>
-            <div class="bill-name">Internet</div>
-            <div class="bill-date">Vence 18/10</div>
-          </div>
-        </div>
-        <div style="text-align:right">
-          <div class="bill-price">R$ 99</div>
-          <span class="status soon">Em breve</span>
-        </div>
-      </div>
-      <div class="bill">
-        <div class="bill-left">
-          <div class="bill-icon">🎬</div>
-          <div>
-            <div class="bill-name">Streaming</div>
-            <div class="bill-date">Vence 22/10</div>
-          </div>
-        </div>
-        <div style="text-align:right">
-          <div class="bill-price">R$ 55</div>
-          <span class="status soon">Em breve</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#recursos" class="hover:text-primary transition-colors">Recursos</a>
+                <a href="#como-funciona" class="hover:text-primary transition-colors">Como funciona</a>
+                <a href="#planos" class="hover:text-primary transition-colors">Planos</a>
+                <a href="#indicacao" class="hover:text-primary transition-colors">Indicação</a>
+                <a href="#faq" class="hover:text-primary transition-colors">FAQ</a>
+            </nav>
 
-<!-- RECURSOS -->
-<section id="recursos">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">Recursos</div>
-      <h2>Tudo o que você precisa para nunca mais atrasar</h2>
-      <p>Ferramentas simples e práticas para organizar sua vida financeira mensal.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">📅</div>
-        <h3>Contas fixas organizadas</h3>
-        <p>Cadastre todas as suas contas mensais e visualize vencimentos em um só lugar.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">💬</div>
-        <h3>Lembretes no WhatsApp</h3>
-        <p>Receba avisos antes do vencimento direto no seu WhatsApp e pague em dia.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Painel financeiro mensal</h3>
-        <p>Acompanhe seus gastos fixos do mês com um painel claro e objetivo.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⏰</div>
-        <h3>Sem atrasos</h3>
-        <p>Com lembretes automáticos, você elimina esquecimentos e multas desnecessárias.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <h3>Transparência total</h3>
-        <p>Você sabe exatamente o que está pagando, quando paga e quanto ainda falta.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🤝</div>
-        <h3>Indique e ganhe desconto</h3>
-        <p>Convide amigos e ganhe R$ 1 por cada ativação confirmada na plataforma.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COMO FUNCIONA -->
-<section id="como-funciona" style="background:var(--bg-soft)">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">Como funciona</div>
-      <h2>Quatro passos simples para o controle total</h2>
-      <p>Comece em minutos e mantenha suas contas sempre organizadas.</p>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h3>Cadastre suas contas</h3>
-        <p>Adicione aluguel, energia, internet e todas as suas contas fixas mensais.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h3>Receba lembretes</h3>
-        <p>Avisos automáticos no WhatsApp antes de cada vencimento das suas contas.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h3>Acompanhe o painel</h3>
-        <p>Veja tudo o que já pagou e o que ainda falta pagar no painel mensal.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <h3>Pague sem atrasos</h3>
-        <p>Mantenha suas contas em dia e evite multas e juros desnecessários.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PLANOS -->
-<section id="planos" class="plans">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">Planos</div>
-      <h2>Escolha o plano ideal para você</h2>
-      <p>Cobrança só após 45 dias para você testar com tranquilidade.</p>
-    </div>
-    <div class="plans-grid">
-      <div class="plan">
-        <h3>Essencial</h3>
-        <p class="plan-desc">Para quem está começando a organizar suas contas.</p>
-        <div class="plan-price">R$ 15<small>/mês</small></div>
-        <div class="plan-billing">Cobrança realizada após 45 dias de uso.</div>
-        <ul>
-          <li>Até 10 contas fixas cadastradas</li>
-          <li>Painel financeiro mensal</li>
-          <li>Lembretes no WhatsApp</li>
-          <li>Cobrança só após 45 dias</li>
-          <li>Indicação R$ 1 por ativa</li>
-        </ul>
-        <a href="https://www.asaas.com/c/cl1s151715642sjm" class="btn btn-outline">Assinar Essencial</a>
-      </div>
-      <div class="plan featured">
-        <span class="plan-tag">Mais completo</span>
-        <h3>Plus</h3>
-        <p class="plan-desc">Para quem quer controle total sem limites de contas.</p>
-        <div class="plan-price">R$ 29<small>/mês</small></div>
-        <div class="plan-billing">Cobrança realizada após 45 dias de uso.</div>
-        <ul>
-          <li>Contas fixas ilimitadas</li>
-          <li>Painel financeiro mensal</li>
-          <li>Lembretes no WhatsApp</li>
-          <li>Cobrança só após 45 dias</li>
-          <li>Indicação R$ 1 por ativa</li>
-        </ul>
-        <a href="https://www.asaas.com/c/vm75qru4csgar6xa" class="btn btn-primary">Assinar Plus</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- INDICAÇÃO -->
-<section id="indicacao">
-  <div class="container">
-    <div class="referral">
-      <div class="referral-grid">
-        <div>
-          <h2>Indique amigos e ganhe desconto</h2>
-          <p>Convide seus amigos para o Pague com Controle e ganhe R$ 1 para cada ativação confirmada. Quanto mais indicações, mais desconto na sua assinatura.</p>
-          <ul>
-            <li>Compartilhe seu link exclusivo</li>
-            <li>Amigo ativa a conta no plano pago</li>
-            <li>Você ganha R$ 1 por ativação</li>
-          </ul>
+            <div class="flex items-center gap-3">
+                <a href="login.html" class="btn-entrar-mobile border border-primary text-primary font-semibold rounded-full px-6 py-2 hover:bg-green-50 transition-all">
+                    Entrar
+                </a>
+                <a href="#planos" class="hidden sm:flex bg-primary text-white font-semibold rounded-full px-6 py-2 bg-primary-hover transition-all">
+                    Começar agora
+                </a>
+                <button id="menu-toggle" class="lg:hidden p-2 text-slate-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div class="referral-card">
-          <h4>Exemplo prático</h4>
-          <div class="ref-row"><span>Indicações no mês</span><span>10 amigos</span></div>
-          <div class="ref-row"><span>Valor por ativação</span><span>R$ 1,00</span></div>
-          <div class="ref-row"><span>Seu ganho no mês</span><span>R$ 10,00</span></div>
-          <div class="ref-row"><span>Desconto aplicado</span><span>R$ 10 off</span></div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 z-[60] bg-white lg:hidden">
+        <div class="p-6 flex flex-col h-full">
+            <div class="flex justify-between items-center mb-10">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">P</span>
+                    </div>
+                    <span class="font-bold text-xl">Pague com Controle</span>
+                </div>
+                <button id="menu-close" class="p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="flex flex-col gap-6 text-lg font-medium">
+                <a href="#recursos" class="mobile-link">Recursos</a>
+                <a href="#como-funciona" class="mobile-link">Como funciona</a>
+                <a href="#planos" class="mobile-link">Planos</a>
+                <a href="#indicacao" class="mobile-link">Indicação</a>
+                <a href="#faq" class="mobile-link">FAQ</a>
+            </nav>
+            <div class="mt-auto">
+                <a href="#planos" class="block w-full bg-primary text-white text-center font-bold py-4 rounded-xl">Começar agora</a>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</section>
 
-<!-- FAQ -->
-<section id="faq">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">FAQ</div>
-      <h2>Perguntas frequentes</h2>
-      <p>Tudo o que você precisa saber antes de começar.</p>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Como funcionam os lembretes no WhatsApp? <span class="icon">+</span></button>
-        <div class="faq-a">Você recebe avisos automáticos antes do vencimento de cada conta cadastrada, direto no seu WhatsApp, para nunca mais esquecer um pagamento.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Quando sou cobrado? <span class="icon">+</span></button>
-        <div class="faq-a">A cobrança da sua assinatura só acontece após 45 dias de uso. Você tem tempo suficiente para testar a plataforma com tranquilidade.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Posso cancelar quando quiser? <span class="icon">+</span></button>
-        <div class="faq-a">Sim, você pode cancelar a qualquer momento direto pelo painel. Atenção: para evitar a cobrança do próximo ciclo, o cancelamento deve ser feito antes da data de vencimento da sua fatura.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Como funciona a indicação? <span class="icon">+</span></button>
-        <div class="faq-a">Você compartilha seu link exclusivo e ganha R$ 1 para cada amigo que ativar um plano pago. Os créditos são aplicados como desconto na sua assinatura.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Meus dados estão seguros? <span class="icon">+</span></button>
-        <div class="faq-a">Sim. Utilizamos criptografia e boas práticas de segurança para proteger suas informações financeiras e pessoais.</div>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 bg-gradient-to-b from-green-50 to-white overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl lg:text-6xl font-bold leading-tight mb-6">
+                        Controle suas contas fixas com clareza e pague sem atrasos
+                    </h1>
+                    <p class="text-slate-600 text-lg mb-8 max-w-lg">
+                        Organize seu orçamento mensal, receba lembretes automáticos e tenha total visibilidade dos seus gastos fixos em um só lugar.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mb-10">
+                        <a href="#planos" class="bg-primary text-white font-bold px-8 py-4 rounded-xl bg-primary-hover shadow-lg shadow-green-200 transition-all">
+                            Quero me organizar
+                        </a>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-green-light text-green-700 p-1 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                            </span>
+                            <span class="text-sm font-medium text-slate-700">Painel financeiro mensal</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-green-light text-green-700 p-1 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                            </span>
+                            <span class="text-sm font-medium text-slate-700">Lembretes no WhatsApp</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-green-light text-green-700 p-1 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                            </span>
+                            <span class="text-sm font-medium text-slate-700">Cobrança só após 45 dias</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-white p-6 rounded-custom shadow-2xl border border-base max-w-md mx-auto">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-lg">Suas contas do mês</h3>
+                            <span class="text-xs font-bold text-primary bg-green-light px-2 py-1 rounded-md">Outubro</span>
+                        </div>
+                        <div class="space-y-4">
+                            <!-- Aluguel -->
+                            <div class="flex items-center justify-between p-3 bg-soft rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                                        🏠
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Aluguel</p>
+                                        <p class="text-xs text-slate-500">Vence dia 10</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-sm">R$ 1.200,00</p>
+                                    <span class="text-[10px] font-bold text-green-600 uppercase">Pago</span>
+                                </div>
+                            </div>
+                            <!-- Energia -->
+                            <div class="flex items-center justify-between p-3 bg-soft rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                                        ⚡
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Energia</p>
+                                        <p class="text-xs text-slate-500">Vence dia 15</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-sm">R$ 245,50</p>
+                                    <span class="text-[10px] font-bold text-orange-500 uppercase">Pendente</span>
+                                </div>
+                            </div>
+                            <!-- Internet -->
+                            <div class="flex items-center justify-between p-3 bg-soft rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                                        🌐
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Internet</p>
+                                        <p class="text-xs text-slate-500">Vence dia 20</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-sm">R$ 99,90</p>
+                                    <span class="text-[10px] font-bold text-slate-400 uppercase">Em breve</span>
+                                </div>
+                            </div>
+                            <!-- Streaming -->
+                            <div class="flex items-center justify-between p-3 bg-soft rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                                        🎬
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Streaming</p>
+                                        <p class="text-xs text-slate-500">Vence dia 25</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-sm">R$ 55,90</p>
+                                    <span class="text-[10px] font-bold text-slate-400 uppercase">Em breve</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="brand">
-          <div class="logo">P</div>
-          <span>Pague com Controle</span>
-        </a>
-        <p>Controle suas contas fixas com clareza, receba lembretes no WhatsApp e pague sem atrasos.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navegação</h4>
-        <ul>
-          <li><a href="#recursos">Recursos</a></li>
-          <li><a href="#como-funciona">Como funciona</a></li>
-          <li><a href="#planos">Planos</a></li>
-          <li><a href="#indicacao">Indicação</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Assinatura</h4>
-        <ul>
-          <li><a href="login.html" class="cancel-link">Cancelar assinatura</a></li>
-        </ul>
-        <p class="footer-notice">Lembre-se de cancelar antes do seu vencimento para evitar novas cobranças.</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      © 2025 Pague com Controle. Todos os direitos reservados.
-    </div>
-  </div>
-</footer>
+    <!-- Recursos -->
+    <section id="recursos" class="py-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Tudo o que você precisa para se organizar</h2>
+                <p class="text-slate-600">Simplicidade e eficiência para o seu controle financeiro.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="p-8 border border-base rounded-custom hover:shadow-soft transition-all">
+                    <div class="w-12 h-12 bg-green-light rounded-xl flex items-center justify-center text-2xl mb-6">📅</div>
+                    <h3 class="font-bold text-xl mb-3">Contas fixas organizadas</h3>
+                    <p class="text-slate-600">Visualize todas as suas obrigações mensais em uma lista clara e intuitiva.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="p-8 border border-base rounded-custom hover:shadow-soft transition-all">
+                    <div class="w-12 h-12 bg-green-light rounded-xl flex items-center justify-center text-2xl mb-6">💬</div>
+                    <h3 class="font-bold text-xl mb-3">Lembretes no WhatsApp</h3>
+                    <p class="text-slate-600">Receba notificações automáticas antes do vencimento para nunca mais pagar juros.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="p-8 border border-base rounded-custom hover:shadow-soft transition-all">
+                    <div class="w-12 h-12 bg-green-light rounded-xl flex items-center justify-center text-2xl mb-6">📊</div>
+                    <h3 class="font-bold text-xl mb-3">Painel financeiro mensal</h3>
+                    <p class="text-slate-600">Acompanhe o total de gastos e o que já foi pago com gráficos simples.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="p-8 border border-base rounded-custom hover:shadow-soft transition-all">
+                    <div class="w-12 h-12 bg-green-light rounded-xl flex items-center justify-center text-2xl mb-6">⏰</div>
+                    <h3 class="font-bold text-xl mb-3">Sem atrasos</h3>
+                    <p class="text-slate-600">Mantenha seu histórico limpo e evite multas desnecessárias com nosso sistema.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="p-8 border border-base rounded-custom hover:shadow-soft transition-all">
+                    <div class="w-12 h-12 bg-green-light rounded-xl flex items-center justify-center text-2xl mb-6">🔒</div>
+                    <h3 class="font-bold text-xl mb-3">Transparência total</h3>
+                    <p class="text-slate-600">Sem taxas escondidas. Você sabe exatamente o que está pagando e por quê.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="p-8 border border-base rounded-custom hover:shadow-soft transition-all">
+                    <div class="w-12 h-12 bg-green-light rounded-xl flex items-center justify-center text-2xl mb-6">🤝</div>
+                    <h3 class="font-bold text-xl mb-3">Indique e ganhe desconto</h3>
+                    <p class="text-slate-600">Convide amigos e receba descontos reais na sua mensalidade por cada ativação.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script>
-  function toggleFaq(btn) {
-    const item = btn.parentElement;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  }
-</script>
+    <!-- Como Funciona -->
+    <section id="como-funciona" class="py-24 bg-soft">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Como funciona</h2>
+                <p class="text-slate-600">Quatro passos simples para sua tranquilidade financeira.</p>
+            </div>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">1</div>
+                    <h4 class="font-bold mb-2">Cadastre suas contas</h4>
+                    <p class="text-sm text-slate-600">Insira os valores e datas de vencimento das suas contas fixas.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">2</div>
+                    <h4 class="font-bold mb-2">Receba lembretes</h4>
+                    <p class="text-sm text-slate-600">Avisamos você via WhatsApp quando o vencimento estiver próximo.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">3</div>
+                    <h4 class="font-bold mb-2">Acompanhe o painel</h4>
+                    <p class="text-sm text-slate-600">Veja o status de cada conta e seu gasto total do mês em tempo real.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">4</div>
+                    <h4 class="font-bold mb-2">Pague sem atrasos</h4>
+                    <p class="text-sm text-slate-600">Mantenha tudo em dia e tenha mais paz de espírito todos os meses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos -->
+    <section id="planos" class="py-24 bg-soft">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Escolha o plano ideal</h2>
+                <p class="text-slate-600">Comece a usar agora e só pague daqui a 45 dias.</p>
+            </div>
+            <div class="max-w-[820px] mx-auto grid md:grid-cols-2 gap-8">
+                <!-- Essencial -->
+                <div class="bg-white p-8 rounded-custom border border-base shadow-sm flex flex-col">
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-2">Essencial</h3>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-bold">R$ 15</span>
+                            <span class="text-slate-500">/mês</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-3 text-sm">
+                            <svg class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Até 10 contas fixas cadastradas
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <svg class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Painel financeiro mensal
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <svg class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Lembretes no WhatsApp
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <svg class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Cobrança só após 45 dias
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <svg class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Indicação R$ 1 por ativa
+                        </li>
+                    </ul>
+                    <a href="https://www.asaas.com/c/cl1s151715642sjm" class="block w-full text-center border-2 border-primary text-primary font-bold py-4 rounded-xl hover:bg-green-50 transition-all">Assinar Essencial</a>
+                </div>
+                <!-- Plus -->
+                <div class="bg-white p-8 rounded-custom border-2 border-primary shadow-xl flex flex-col relative">
+                    <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">Mais completo</span>
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-2">Plus</h3>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-bold">R$ 29</span>
+                            <span class="text-slate-500">/mês</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-3 text-sm">
+                            <svg class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Contas fixas ilimitadas
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <svg class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Painel financeiro mensal
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <svg class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Lembretes no WhatsApp
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <svg class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Cobrança só após 45 dias
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <svg class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Indicação R$ 1 por ativa
+                        </li>
+                    </ul>
+                    <a href="https://www.asaas.com/c/vm75qru4csgar6xa" class="block w-full text-center bg-primary text-white font-bold py-4 rounded-xl bg-primary-hover transition-all">Assinar Plus</a>
+                </div>
+            </div>
+            <p class="text-center mt-10 text-slate-500 text-sm">Cobrança realizada após 45 dias de uso.</p>
+        </div>
+    </section>
+
+    <!-- Indicação -->
+    <section id="indicacao" class="py-24">
+        <div class="container mx-auto px-4">
+            <div class="bg-green-light rounded-custom p-8 lg:p-16">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6">Indique e ganhe desconto real</h2>
+                        <p class="text-slate-700 text-lg mb-8">
+                            Compartilhe o Pague com Controle com seus amigos. Para cada amigo que ativar uma assinatura através do seu link, você recebe R$ 1,00 de desconto recorrente na sua mensalidade.
+                        </p>
+                        <a href="#planos" class="inline-block bg-primary text-white font-bold px-8 py-4 rounded-xl bg-primary-hover transition-all">
+                            Começar a indicar
+                        </a>
+                    </div>
+                    <div>
+                        <div class="bg-white p-8 rounded-custom shadow-sm">
+                            <h4 class="font-bold text-xl mb-6">Exemplo prático</h4>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center pb-4 border-b border-base">
+                                    <span class="text-slate-600">10 amigos indicados</span>
+                                    <span class="font-bold text-primary">+ R$ 10,00</span>
+                                </div>
+                                <div class="flex justify-between items-center pb-4 border-b border-base">
+                                    <span class="text-slate-600">Valor por ativação</span>
+                                    <span class="font-bold">R$ 1,00</span>
+                                </div>
+                                <div class="flex justify-between items-center pt-2">
+                                    <span class="font-bold">Seu desconto mensal</span>
+                                    <span class="text-2xl font-bold text-primary">R$ 10,00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Dúvidas frequentes</h2>
+                <p class="text-slate-600">Tudo o que você precisa saber sobre o serviço.</p>
+            </div>
+            <div class="space-y-4">
+                <!-- Item 1 -->
+                <div class="accordion-item border border-base rounded-2xl">
+                    <button class="accordion-header w-full flex items-center justify-between p-6 text-left font-bold">
+                        Como funciona o período de 45 dias?
+                        <span class="icon-plus transition-transform">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-6 text-slate-600">
+                            Você se cadastra hoje e tem acesso total a todos os recursos. A primeira cobrança só será realizada automaticamente após 45 dias de uso.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="accordion-item border border-base rounded-2xl">
+                    <button class="accordion-header w-full flex items-center justify-between p-6 text-left font-bold">
+                        Como recebo os lembretes no WhatsApp?
+                        <span class="icon-plus transition-transform">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-6 text-slate-600">
+                            Após cadastrar suas contas, nosso sistema envia notificações automáticas para o número de WhatsApp cadastrado dias antes do vencimento.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="accordion-item border border-base rounded-2xl">
+                    <button class="accordion-header w-full flex items-center justify-between p-6 text-left font-bold">
+                        Posso cancelar quando quiser?
+                        <span class="icon-plus transition-transform">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-6 text-slate-600">
+                            Sim, você pode cancelar a qualquer momento pelo painel ou pelo link enviado no e-mail e no celular. Atenção: para evitar a cobrança do próximo ciclo, o cancelamento deve ser feito antes da data de vencimento da sua fatura.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="accordion-item border border-base rounded-2xl">
+                    <button class="accordion-header w-full flex items-center justify-between p-6 text-left font-bold">
+                        O desconto de indicação é cumulativo?
+                        <span class="icon-plus transition-transform">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-6 text-slate-600">
+                            Sim! Quanto mais amigos você indicar e eles mantiverem a assinatura ativa, maior será o seu desconto, podendo chegar até a mensalidade gratuita.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="accordion-item border border-base rounded-2xl">
+                    <button class="accordion-header w-full flex items-center justify-between p-6 text-left font-bold">
+                        Quais formas de pagamento são aceitas?
+                        <span class="icon-plus transition-transform">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-6 text-slate-600">
+                            Aceitamos Cartão de Crédito e PIX para as assinaturas mensais através da plataforma segura do Asaas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0f172a] text-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-12 mb-16">
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">P</span>
+                        </div>
+                        <span class="font-bold text-xl">Pague com Controle</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Sua ferramenta definitiva para organização de contas fixas e controle financeiro pessoal.
+                    </p>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-6">Navegação</h5>
+                    <ul class="space-y-4 text-slate-400 text-sm">
+                        <li><a href="#recursos" class="hover:text-white transition-colors">Recursos</a></li>
+                        <li><a href="#como-funciona" class="hover:text-white transition-colors">Como funciona</a></li>
+                        <li><a href="#planos" class="hover:text-white transition-colors">Planos</a></li>
+                        <li><a href="#indicacao" class="hover:text-white transition-colors">Indicação</a></li>
+                        <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-6">Assinatura</h5>
+                    <div class="space-y-4">
+                        <a href="login.html" class="text-[#fca5a5] hover:text-red-300 text-sm font-medium transition-colors underline underline-offset-4">
+                            Cancelar assinatura
+                        </a>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            ⚠️ Lembre-se de cancelar antes do seu vencimento para evitar novas cobranças.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-800 text-center text-slate-500 text-xs">
+                &copy; 2023 Pague com Controle. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        menuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Accordion Logic
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all other items
+                document.querySelectorAll('.accordion-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
